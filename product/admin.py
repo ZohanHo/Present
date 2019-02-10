@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Product
-from .models import ProductCompanion, SizeProd, Recording, Buket, Basket, CategoryProduct
+from .models import ProductCompanion, SizeProd, Recording, Buket, Basket, CategoryProduct #Category
 
 class CategoryProductAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Product._meta.fields]

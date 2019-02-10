@@ -7,5 +7,6 @@ urlpatterns = [
     path('buket/<pk>/',DetailViewBuket.as_view(),  name="buket_url"),
     path('action/', action,  name="action"),
     path('buket/', ListViewBuket.as_view(),  name="buket"),
+    #path('basket/', ListViewBasket.as_view(),  name="basket"),
 
 ]

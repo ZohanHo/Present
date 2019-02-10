@@ -102,7 +102,7 @@ class Basket(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
-    image_product = models.ImageField(upload_to="static/images/", default="")
+    image = models.ImageField(upload_to="static/images/", default="")
 
     def __str__(self):
         return "{}".format(self.product_name)
@@ -126,3 +126,14 @@ class CategoryProduct(models.Model):
     class Meta:
         verbose_name = "Категория товара"
         verbose_name_plural = "категория товаровв"
+
+# class Category(models.Model):
+#     name = models.CharField(max_length=30, blank=True)
+#     is_active = models.BooleanField(default=True)
+#
+#     def __str__(self):
+#         return "{}".format(self.name)
+#
+#     class Meta:
+#         verbose_name = "Категория товара"
+#         verbose_name_plural = "категория товаровв"
