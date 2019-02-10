@@ -202,5 +202,7 @@ class DetailViewChocolate(DetailView):
 
 
 def pay(request):
-
     return render(request, "product/pay.html", context={})
+
+def delivery(request):
+    return render(request, "product/delivery.html", context={})

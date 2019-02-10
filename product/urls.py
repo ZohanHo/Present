@@ -12,5 +12,6 @@ urlpatterns = [
     path('basket/', ListViewBasket.as_view(),  name="basket"),
     path('chocolate/', ListViewChocolate.as_view(),  name="chocolate"),
     path('pay/', pay,  name="pay"),
+    path('delivery/', delivery,  name="delivery"),
 
 ]
