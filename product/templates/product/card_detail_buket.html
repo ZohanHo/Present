@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+
+{%  block detail_buket %}
+
+
+    <div class="container" >
+        <div class="row" style="">
+            <div class="col-md-4 offset-2" style="padding: 0; background: #F3F3F3; text-align: center;">
+                <h4 style="margin: 20px">{{ object.product_name }}</h4>
+                <img src="{{ object.image_product.url }}" alt="" style="width: 40%; border: solid 1px">
+            </div>
+             <div class="col-md-4 " style="padding: 0; background: #F3F3F3; color: #65696D; ">
+                 <!-- <p style="background: sandybrown;">что то</p><br> -->
+                 <br>
+                 <p><span id="price_span1" style="text-align: center; color: brown; font-size: small; margin: 3px">{{ object.price }}</span><span style="text-align: center; color: brown; font-size: small; ">UAH</span></p>
+
+                 <span style="">
+                    Размер букетаp
+                    <strong >
+                        <input id="s" checked="checked" onclick="this.checked=!this.isChecked; smoll();" type="radio"  onmousedown="this.isChecked=this.checked;" name="myradio" value="s" title="s"> S (2 кг)
+                        <input id="m" onclick="this.checked=!this.isChecked; medium()"  type="radio" onMouseDown="this.isChecked=this.checked;" name="myradio" value="l" title="m"> M (3 кг)
+                        <input id="l" onclick="this.checked=!this.isChecked; lagre()" type="radio" onmousedown="this.isChecked=this.checked;" name="myradio" value="m" title="s"> L (4 кг)
+                    </strong>
+                  </span><br>
+                <form action="" style="margin-top: 15px">
+                 Добавить шоколад
+                 <select onclick="" name="" id="dop_chocolate" title="chocolate" >
+                     <option  value="">Нет</option>
+                     <option  data-dop="80.00" id="" value="80">Да (+ 80.00 UAH) </option>
+                 </select>
+                </form>
+                 <br>
+                <span>Цена с опциями: </span><span id="price_span2">{{ object.price }} </span><span> UAH</span>
+                 <hr>
+
+                <!-- inout количества товара -->
+
+                 <div class="quantity-block">
+                        <button class="quantity-arrow-minus"> - </button>
+                            <input style="width: 10%; text-align: center" class="quantity-num" type="number" value="1" maxlength="100" title="quantity-num"/>
+                        <button class="quantity-arrow-plus"> + </button>
+                    <button style="color: white; border-radius: 5px; " class="btn btn-warning">В КОРЗИНУ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+<!-- цена в деталке по количеству килограм -->
+    <script>
+
+        var checkbox1 = $('#s');
+        var checkbox2 = $('#m');
+        var checkbox3 = $('#l');
+
+        var price_smoll = 2250..toFixed(2); // .toFixed(2) - 2 знака после запятой
+        var price_medium = 2500..toFixed(2); // .toFixed(2) - 2 знака после запятой
+        var price_lagre = 2750..toFixed(2); // .toFixed(2) - 2 знака после запятой
+
+        var price_smoll_dop = 2330..toFixed(2); // .toFixed(2) - 2 знака после запятой
+        var price_medium_dop = 2580..toFixed(2); // .toFixed(2) - 2 знака после запятой
+        var price_lagre_dop = 2830..toFixed(2); // .toFixed(2) - 2 знака после запятой
+
+        var span1 = document.getElementById('price_span1');
+        var span2 = document.getElementById('price_span2');
+
+        function smoll() {
+            if (checkbox1) {
+                span1.innerHTML = price_smoll;
+                span2.innerHTML = price_smoll;
+
+            }
+        }
+
+        function medium() {
+            if (checkbox2) {
+                span1.innerHTML = price_medium;
+                span2.innerHTML = price_medium;
+            }
+        }
+
+        function lagre() {
+            if (checkbox3) {
+                span1.innerHTML = price_lagre;
+                span2.innerHTML = price_lagre;
+            }
+        }
+
+
+
+         <!-- значение с select-options -->
+        var select = document.getElementById('dop_chocolate');
+
+
+            select.addEventListener('change', function() {
+
+
+                var i = this.selectedIndex; //по индексу можем выбрать options нужный от 0 и дальше по порядку
+                if (checkbox1)
+                if (i == 1) {
+                    //var value = this.options[i].value; // так можно считать значение с value у options
+                    if (checkbox1) {
+                        span1.innerHTML = price_smoll_dop;
+                    }
+                    if (checkbox2)  {
+                        span1.innerHTML = price_medium_dop;
+                    }
+                    if (checkbox3)  {
+                        span1.innerHTML = price_lagre_dop;
+                    }
+
+                }
+
+                if (i == 0) {
+
+                    if (checkbox1)  {
+                        span1.innerHTML = price_smoll;
+                    }
+                    if (checkbox2)  {
+                        span1.innerHTML = price_medium;
+                    }
+                    if (checkbox3)  {
+                        span1.innerHTML = price_lagre;
+                    }
+                }
+            });
+
+
+    </script>
+
+    <script>
+        // <!-- inout количества товара -->
+            $(function() {
+
+          (function quantityProducts() {
+            var $quantityArrowMinus = $(".quantity-arrow-minus");
+            var $quantityArrowPlus = $(".quantity-arrow-plus");
+            var $quantityNum = $(".quantity-num");
+
+            $quantityArrowMinus.click(quantityMinus);
+            $quantityArrowPlus.click(quantityPlus);
+
+            function quantityMinus() {
+              if ($quantityNum.val() > 1) {
+                $quantityNum.val(+$quantityNum.val() - 1);
+              }
+            }
+
+            function quantityPlus() {
+              $quantityNum.val(+$quantityNum.val() + 1);
+            }
+          })();
+
+        });
+    </script>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2" style="background: #F3F3F3; color: #65696D">
+                <p style="border: groove; margin-top: 20px">Контейнер может меняться.</p>
+                <p style="padding-left: 10px; font-size: small">Ингредиенты:</p>
+
+                <ul style="padding-left: 20px">
+                    <li>клубника</li>
+                    <li>ананас</li>
+                    <li>виноград</li>
+                    <li>дыня</li>
+                    <li>апельсин</li>
+                </ul>
+
+
+                <h3 style="background: #F3F3F3; color: #65696D;padding: 10px">Сопутствующие товары</h3>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" style=""></div>
+        {% for foo in companion %}
+            <div class="col-md-2" style="background: #F3F3F3; color: #65696D;padding: 10px">
+                <img style="width: 100%" src="{{ foo.image_product.url }} " alt="">
+                <p  style="margin: 10px; color: orange; text-align: center; font-size: 12px">{{ foo.price }} UAH</p>
+                <p style="margin: 10px; color: #65696D; text-align: center; font-size: 10px">{{ foo.product_name }}</p>
+
+                <div style="text-align: center">
+                    <form id="formprice" action="">
+                        <button style="color: white; " class="btn btn-warning">В КОРЗИНУ</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2" style="background: #F3F3F3; color: #65696D;padding: 10px">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <strong>
+                            КОМЕНТАРИИ
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{##}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-md-8 offset-2" style="background: #F3F3F3; color: #65696D;">#}
+{#                <a href="#">Добавить коментарий</a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+
+
+
+</div>
+
+
+
+{% endblock %}
