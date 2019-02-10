@@ -111,7 +111,7 @@ class Basket(models.Model):
         verbose_name = "Подарочная корзина"
         verbose_name_plural = "подарочные корзины"
 
-    def get_absolute_url_buket(self):  # метод который возвращает ссылку на конкретный обьет класса, передаем url шаблона и словарь
+    def get_absolute_url_basket(self):  # метод который возвращает ссылку на конкретный обьет класса, передаем url шаблона и словарь
         return reverse("basket_url", kwargs={"pk": self.pk})  # в словарь в качестве ключа получает поле,
         # то поле по которому мы проводим идентификацию обьекта и self.slug или self.pk (поле конкретно обьекта )
 
