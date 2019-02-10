@@ -11,6 +11,13 @@ urlpatterns = [
     path('buket/', ListViewBuket.as_view(),  name="buket"),
     path('basket/', ListViewBasket.as_view(),  name="basket"),
     path('chocolate/', ListViewChocolate.as_view(),  name="chocolate"),
+    path('bith/', ListViewBuketBith.as_view(),  name="bith"),
+    path('bisnes/', ListViewBuketBisnes.as_view(),  name="bisnes"),
+    path('men/', ListViewBuketMen.as_view(),  name="men"),
+    path('year/', ListViewBuketYear.as_view(),  name="year"),
+    path('mama/', ListViewBuketMama.as_view(),  name="mama"),
+    path('love/', ListViewBuketLove.as_view(),  name="love"),
+    path('kids/', ListViewBuketKids.as_view(),  name="kids"),
     path('pay/', pay,  name="pay"),
     path('delivery/', delivery,  name="delivery"),
 

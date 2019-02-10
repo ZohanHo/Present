@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block chocolate %}
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+
+                <a href=""><img style="width: 25%;" class=""
+                                        src="{% static "images/delivery/del.png" %}" alt="logo"></a>
+                <p style="font-size: large; font-weight: 600; color: #7FBF3B">Доставка по Киеву осуществляется ежедневно с 7.00 до 20.00</p>
+
+                <p style="font-weight: 400; font-size: medium; color: orange; padding-top: 15px">СТОИМОСТЬ КУРЬЕРСКОЙ ДОСТАВКИ</p>
+
+                    <ui >
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">стандартная с 9.30 до 20.00 — 150 грн</li>
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">ранняя с 7.00 до 9.00 — 200 грн</li>
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">срочная* (в течении 3х часов после оформления заказа) — 200 грн</li>
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">за город (в пределах 20 км от Києва) — 250 грн</li>
+                    </ui>
+                <br>
+
+                <p style="font-weight: 400; font-size: medium; color: orange">САМОВЫВОЗ. СКИДКА 50 ГРН:</p>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D;"> Вы можете самостоятельно забрать заказ !уже через 45 минут
+                                                               после его оформления или в любое время с 09:00 до 20:00.
+                                                               Выбрав этот вариант, Вы получите скидку 50 гривен на свой заказ,
+                                                               поскольку экономите время наших сотрудников. Кодое слово для
+                                                               получения скидки: КАРАМБОЛЬ</p>
+                <p style="font-weight: 400; font-size: medium; color: orange">КАК ОФОРМИТЬ ЗАКАЗ</p>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D;">Оформить заказ по
+                    телефону можно каждый день с 9.00-20.00, оформить и оплатить заказ на сайте — круглосуточно.Для заказов
+                    оформленных до 18.00 возможна доставка в тот же день.Если Вы хотите получить заказ с ранней доставкой
+                    с 7.00 до 9.00 утра, необходимо оформить его до 18.00 предыдущего дня.</p>
+                <div>
+                    <br>
+                    <span>
+                      <img style="width: 15%;" class="" src="{% static "images/delivery/photootchet.jpg" %}" alt="logo">
+                        <span style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D; padding-top: 10px">Дополнительно: По Вашему желанию, мы бесплатно сделаем фото</span>
+                    </span>
+                </div>
+                <p style="font-size: large; font-weight: 600; color: #BAAE00; padding-top: 20px">Cпасибо, что выбираете BANANA!</p>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

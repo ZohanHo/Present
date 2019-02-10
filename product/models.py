@@ -20,8 +20,8 @@ class Product(models.Model):
         return "{}".format(self.product_name)
 
     class Meta:
-        verbose_name = "Товар"
-        verbose_name_plural = "Товары"
+        verbose_name = "Фруктовый букет"
+        verbose_name_plural = "Фруктовые букеты"
 
     def get_absolute_url_carousel(self):  # метод который возвращает ссылку на конкретный обьет класса, передаем url шаблона и словарь
         return reverse("carousel_url", kwargs={"pk": self.pk})  # в словарь в качестве ключа получает поле,
@@ -41,6 +41,7 @@ class Buket(models.Model):
     smoll_s = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     smoll_m = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     smoll_l = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
 
     def __str__(self):
         return "{}".format(self.product_name)
@@ -103,6 +104,7 @@ class Basket(models.Model):
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
     image = models.ImageField(upload_to="static/images/", default="")
+    category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
 
     def __str__(self):
         return "{}".format(self.product_name)
@@ -134,6 +136,7 @@ class Chocolate(models.Model):
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
     image = models.ImageField(upload_to="static/images/", default="")
+    category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
 
     def __str__(self):
         return "{}".format(self.product_name)
@@ -144,3 +147,4 @@ class Chocolate(models.Model):
 
     def get_absolute_url_chocolate(self):
         return reverse("chocolate_url", kwargs={"pk": self.pk})
+
