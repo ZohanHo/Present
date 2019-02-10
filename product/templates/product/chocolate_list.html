@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block chocolate %}
+
+    <div class="container">
+        <div class="row" style="padding-top: 10px">
+            <div style="" class="col-md-2 offset-2">
+                <ul style="margin: 10px;">
+                    <li class="buket-li"><a class="buket-a" href="">Подарочные корзины для мужчин</a></li>
+                    <li class="buket-li"><a class="buket-a" href="">С днем рождения</a></li>
+                    <li class="buket-li"><a class="buket-a" href="">Поправляйся!</a></li>
+                    <li class="buket-li"><a class="buket-a" href="">Любовь и романтика</a></li>
+                    <li class="buket-li"><a class="buket-a" href="">Бизнес подарки</a></li>
+                    <br>
+                    <li class="buket-li"><a class="buket-a" href="">ВОЗДУШНЫЕ ШАРИКИ</a></li>
+                </ul>
+
+
+            </div>
+            <div style="" class="col-md-8   ">
+                <div class="container">
+                    <div class="row">
+                    <div><img class="" src="{% static 'images/chocolate_border.jpg' %}" alt="" style="width: 76.5%; "></div>
+                    <div>
+                        <h5 style="padding-top: 12px; color: orange">Фрукты в шоколаде</h5>
+                        <p style="width: 76.5%;padding-top: 5px">Праздники и значимые события в нашей жизни следуют непрерывно, и каждый раз приходится думать,
+                                    что же преподнести родителям, любимому человеку, ребенку, коллегам по работе. </p>
+                    </div>
+                         {% for foo in page %}
+                            <div style="text-align: center; margin: 2.5px 2px 2.5px;  border: solid 1px grey;" class="col-md-3">
+                                <a href="{{ foo.get_absolute_url_chocolate }}"><img class="" src="{{ foo.image.url }}" alt="" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px"></a>
+                                <div style="margin-top: 8px">
+                                    <span style="">{{ foo.product_name }}</span>
+                                </div>
+
+                                <br>
+                                <div>
+                                    <span style="color: maroon; font-size: small">{{ foo.price }} UAH</span>
+                                </div>
+                                <button style="padding: 3px;padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Paginator -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-6">
+                <nav aria-label="...">
+                    <ul class="pagination" style="">
+                        <li style="" class="page-item {% if not prev_url %}disabled{% endif %}">
+                            <a style="" class="page-link" href="{{ prev_url }}" tabindex="-1">Вперед</a>
+                        </li>
+                        {% for foo in page.paginator.page_range %}
+                            {% if page.number == foo %}
+                                <li class="page-item active"> <!-- active -->
+                                    <a style="" class="page-link" href="?page={{ foo }}">{{ foo }}<span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                            {% elif foo > page.number|add:-3 and foo < page.number|add:3 %}
+                                <li class="page-item">
+                                    <a style="" class="page-link" href="?page={{ foo }}">{{ foo }}<span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        <li class="page-item {% if not next_url %}disabled{% endif %}">
+                            <a style="" class="page-link" href="{{ next_url }}" tabindex="-1">Назад</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+    .buket-li {
+        margin-bottom: 12px; font-size: x-small
+    }
+    .buket-a {
+        margin: 5px; color: black;
+    }
+
+    </style>
+
+
+{% endblock %}

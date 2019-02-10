@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block chocolate %}
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <p style="padding-top: 15px; font-size: medium; font-weight: 600; color: #65696D ">Оплатить заказ Вы можете любым удобным для Вас способом</p>
+
+                    <ui >
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">Наличными</li>
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D"> Банковской картой</li>
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">Оплатить наличными до исполнения заказа</li>
+                        <li style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D"> Встроенный эквайринг</li>
+                    </ui>
+                <br>
+                <p style="font-weight: 400; font-size: medium; color: #65696D">Наличными курьеру</p>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">Вы можете оплатить Ваш заказ наличными курьеру при получения заказа (если заказчик и получатель это один и тот же человек)</p>
+                <br>
+                <p style="font-weight: 400; font-size: medium; color: #65696D">Банковской картой</p>
+                <span>
+
+                    <a href=""><img style="width: 15%; padding-left: 35px" class=""
+                                        src="{% static "media/images/bank/mastercard.png" %}"
+                                        alt="logo"></a>
+                    <a href=""><img style="width: 10%" class=""
+                                        src="{% static "media/images/bank/visa.png" %}" alt="logo"></a>
+                </span>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D">
+                    Через платежную систему
+                </p>
+                <a href=""><img style="width: 35%; padding-left: 20px;" class=""
+                                        src="{% static "images/pay/liqpay.png" %}" alt="logo"></a>
+
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D; padding-top: 10px">
+                    К оплате через интернет принимаются карты Visa и MasterCatd
+                </p>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D; padding-top: 10px">
+                    Оформляя заказ, выберите способ оплаты
+                    "Оплатить банковской картой", при нажатии которой браузер перейдет на страницу платежной системы.
+                </p>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D; padding-top: 10px">
+                    Обратите внимание, что оплатить заказ Вы можете как из Украины, так и из любой другой страны мира.
+                    Если карта в другой валюте, конвертация произведется автоматически.
+                </p>
+                <br>
+                <p style="font-weight: 400; font-size: medium; color: #65696D">Оплата наличными до выполнения заказа</p>
+                <p style="padding-left: 20px;font-weight: 400; font-size: small; color: #65696D; padding-top: 0">
+                    Наличными можно сделать предоплату за заказ, если Вы хотите сделать сюрприз/подарок другому человеку.
+                    После оформления заказа через интернет-магазин по указаному адресу приедет курьер для получения оплаты.
+                    Сам заказ будет доставлен в указаное время на адрес получателя. (Выезд курьєра 50грн.)
+                </p>
+                <p style="font-weight: 400; font-size: medium; color: #65696D">Встроенный эквайринг</p>
+                <a href=""><img style="width: 35%; padding-left: 20px;" class=""
+                                        src="{% static "images/pay/wayforpay.png" %}" alt="logo"></a>
+
+                <p style="font-weight: 400; font-size: medium; color: #65696D">Вы самостоятельно вводите сумму покупки, которую Вам
+                   подтвердит менеджер</p>
+                <br>
+                <a href=""><img style="width: 80%; padding-left: 20px;" class=""
+                                        src="{% static "images/pay/wayforpay_pokupka.jpg" %}" alt="logo"></a>
+                <p></p>
+                <br>
+                <p style="font-weight: 400; font-size: medium; color: steelblue">Если у Вас есть желание оплатить заказ другим удобным способом - сообщите нам,
+                мы постараемся сделать покупку максимально удобной для Вас.</p>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

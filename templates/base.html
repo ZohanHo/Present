@@ -61,7 +61,7 @@
         <div style="padding-top: 60px;padding-bottom: 10px;padding-left: 0;padding-right: 0"  class="col-md-3">
             <span>
                <ul class="hr menu">
-                   <li><a style="font-size: small" href="">Как оплатить</a></li>
+                   <li><a style="font-size: small" href="{% url "pay" %}">Как оплатить</a></li>
                    <li><a style="font-size: small" href="">Доставка</a></li>
                    <li><a style="font-size: small" href="">Акции</a></li>
                    <li><a style="font-size: small" href="">Контакты</a></li>
@@ -96,7 +96,7 @@
                        <li><a href="{% url "base" %}">ГЛАВНАЯ</a></li>
                        <li><a href="{% url "buket" %}">ФРУКТОВЫЕ БУКЕТЫ</a></li>
                        <li><a href="{% url "basket" %}">ПОДАРОЧНЫЕ КОРЗИНЫ</a></li>
-                       <li><a href="">ФРУКТЫ В ШОКОЛАДЕ</a></li>
+                       <li><a href="{% url "chocolate" %}">ФРУКТЫ В ШОКОЛАДЕ</a></li>
                        <li><a href="">АКЦИИ</a></li>
                        <li><a href="">14 ФЕВРАЛЯ</a></li>
                        <li style="border: solid orange"><a href="">Корзина пуста</a></li>
@@ -109,9 +109,12 @@
 {% block menu %}{% endblock %}
 {% block carusel %}{% endblock %}
 {% block content %}{% endblock %}
-{%  block detail_carousel %}{% endblock %}
+{% block detail_carousel %}{% endblock %}
 {% block buket %}{% endblock %}
-{%  block detail_buket %}{% endblock %}
+{% block detail_buket %}{% endblock %}
+{% block chocolate %}{% endblock %}
+{% block detail_chocolate %}{% endblock %}
+
 
 <script src="{% static "js/script.js" %}"></script>
 

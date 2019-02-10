@@ -111,9 +111,9 @@ class Basket(models.Model):
         verbose_name = "Подарочная корзина"
         verbose_name_plural = "подарочные корзины"
 
-    def get_absolute_url_basket(self):  # метод который возвращает ссылку на конкретный обьет класса, передаем url шаблона и словарь
-        return reverse("basket_url", kwargs={"pk": self.pk})  # в словарь в качестве ключа получает поле,
-        # то поле по которому мы проводим идентификацию обьекта и self.slug или self.pk (поле конкретно обьекта )
+    def get_absolute_url_basket(self):
+        return reverse("basket_url", kwargs={"pk": self.pk})
+
 
 
 class CategoryProduct(models.Model):
@@ -127,13 +127,20 @@ class CategoryProduct(models.Model):
         verbose_name = "Категория товара"
         verbose_name_plural = "категория товаровв"
 
-# class Category(models.Model):
-#     name = models.CharField(max_length=30, blank=True)
-#     is_active = models.BooleanField(default=True)
-#
-#     def __str__(self):
-#         return "{}".format(self.name)
-#
-#     class Meta:
-#         verbose_name = "Категория товара"
-#         verbose_name_plural = "категория товаровв"
+class Chocolate(models.Model):
+    product_name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    date = models.DateTimeField(auto_now_add=True, auto_now=False)
+    update = models.DateTimeField(auto_now=True, auto_now_add=False)
+    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to="static/images/", default="")
+
+    def __str__(self):
+        return "{}".format(self.product_name)
+
+    class Meta:
+        verbose_name = "Фрукты в шоколаде"
+        verbose_name_plural = "Фрукты в шоколаде"
+
+    def get_absolute_url_chocolate(self):
+        return reverse("chocolate_url", kwargs={"pk": self.pk})

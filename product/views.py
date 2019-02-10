@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket
+from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate
 from django.core.paginator import Paginator
 
 from django.views.generic import *
@@ -114,8 +114,6 @@ class ListViewBasket(ListView):
     model = Basket
     template_name = "product/basket_list.html"
 
-
-
     def get_context_data(self, **kwargs):
 
         basket = Basket.objects.all()
@@ -156,3 +154,53 @@ class DetailViewBasket(DetailView):
         context["buket"] = basket
         context["companion"] = compabion
         return context
+
+
+class ListViewChocolate(ListView):
+    model = Chocolate
+    template_name = "product/chocolate_list.html"
+
+    def get_context_data(self, **kwargs):
+
+        chocolate = Chocolate.objects.all()
+
+        # Paginator
+        paginator = Paginator(chocolate, 9)
+        page_number = self.request.GET.get("page")
+        page = paginator.get_page(page_number)
+        is_paginated = page.has_other_pages()
+        if page.has_previous():
+            prev_url = "?page={}".format(page.previous_page_number())
+        else:
+            prev_url = ""
+        if page.has_next():
+            next_url = "?page={}".format(page.next_page_number())
+        else:
+            next_url = ""
+
+        context = super(ListViewChocolate, self).get_context_data(**kwargs)
+
+
+        context["chocolate"] = chocolate
+        context["page"] = page
+        context["is_paginated"] = is_paginated
+        context["prev_url"] = prev_url
+        context["next_url"] = next_url
+
+        return context
+
+class DetailViewChocolate(DetailView):
+    model = Chocolate
+    template_name = "product/card_detail_chocolate.html"
+
+    def get_context_data(self, **kwargs):
+        chocolate = Chocolate.objects.all()
+        compabion = ProductCompanion.objects.all()
+        context = super(DetailViewChocolate, self).get_context_data(**kwargs)
+        context["chocolate"] = chocolate
+        context["companion"] = compabion
+
+
+def pay(request):
+
+    return render(request, "product/pay.html", context={})
