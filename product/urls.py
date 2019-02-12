@@ -7,6 +7,7 @@ urlpatterns = [
     path('buket/<pk>/',DetailViewBuket.as_view(),  name="buket_url"),
     path('basket/<pk>/',DetailViewBasket.as_view(),  name="basket_url"),
     path('chocolate/<pk>/',DetailViewChocolate.as_view(),  name="chocolate_url"),
+    path('air/<pk>/',DetailViewAir.as_view(),  name="air_url"),
     path('action/', action,  name="action"),
     path('buket/', ListViewBuket.as_view(),  name="buket"),
     path('basket/', ListViewBasket.as_view(),  name="basket"),
@@ -17,8 +18,15 @@ urlpatterns = [
     path('year/', ListViewBuketYear.as_view(),  name="year"),
     path('mama/', ListViewBuketMama.as_view(),  name="mama"),
     path('love/', ListViewBuketLove.as_view(),  name="love"),
+    path('bith_basket/', ListViewBasketBith.as_view(),  name="bith_basket"),
+    path('bisnes_basket/', ListViewBasketBisnes.as_view(),  name="bisnes_basket"),
+    path('love_basket/', ListViewBasketLove.as_view(),  name="love_basket"),
+    path('fruct_chocolate/', ListViewChocolateFructs.as_view(),  name="fruct_chocolate"),
+    path('chery_chocolate/', ListViewChocolateChery.as_view(),  name="chery_chocolate"),
     path('kids/', ListViewBuketKids.as_view(),  name="kids"),
     path('pay/', pay,  name="pay"),
     path('delivery/', delivery,  name="delivery"),
+    path('contact/', contact,  name="contact"),
+    path('air/', ListViewAir.as_view(),  name="air"),
 
 ]

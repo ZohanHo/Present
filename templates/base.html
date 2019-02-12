@@ -52,19 +52,23 @@
 <body>
 
 
+        <div style="position: absolute; top: 10%; left: 5%">
+            <img src="{% static 'images/under-construction.png' %}" alt="Сайт в разработке">
+        </div>
+
 <div class="container">
     <div class="row">
         <div style="padding-top: 10px; padding-bottom: 10px;"  class="col-md-2 offset-2">
             <span >
-                <a style="padding-top: 5px" href=""><img class="img-fluid logo" src="{% static "media/images/banana.png" %}" alt="logo"></a>
+                <a style="padding-top: 5px" href="{% url "base" %}"><img class="img-fluid logo" src="{% static "media/images/banana.png" %}" alt="logo"></a>
             </span></div>
         <div style="padding-top: 60px;padding-bottom: 10px;padding-left: 0;padding-right: 0"  class="col-md-3">
             <span>
                <ul class="hr menu">
                    <li><a style="font-size: small; color: darkorange" href="{% url "pay" %}">Как оплатить</a></li>
                    <li><a style="font-size: small; color: darkorange" href="{% url "delivery" %}">Доставка</a></li>
-                   <li><a style="font-size: small; color: darkorange" href="">Акции</a></li>
-                   <li><a style="font-size: small; color: darkorange" href="">Контакты</a></li>
+                   <li><a style="font-size: small; color: darkorange" href="{% url "kids" %}">Акции</a></li>
+                   <li><a style="font-size: small; color: darkorange" href="{% url "contact" %}">Контакты</a></li>
                 </ul>
                 <ul class="hr menu">
                    <li><a style="font-size: small; color: darkorange" href="">> UA</a></li>
@@ -74,11 +78,9 @@
         <div style=""  class="col-md-3">
             <span>
                 <div style="padding-top: 30px;padding-bottom: 20px;padding-left: 30px" >
-                    <a  href="" class="badge badge-warning Warning" style="text-align: center; color: white; font-weight: 200; font-family: sans-serif;font-size: small;">
-                        Оставьте номер. Мы перезвоним</a>
-                    <p></p>
+                    <button style="text-align: center; color: white; font-weight: 200; font-family: sans-serif;font-size: small; margin-bottom: 10px; border-radius: 2px 10px 2px ; padding: 2px 10px 2px" class="btn-warning open_fast" form="">Оставьте номер. Мы перезвоним</button>
                     <p style="font-family: Calibri; font-size: small; text-align: left">ЗАКАЗЫВАЙТЕ ПО ТЕЛЕФОНУ В КИЕВЕ</p>
-                    <a href=""><p style="font-family: Calibri; font-size: large; color: #342F2F; text-align: center">096 26 11 770 (Viber)</p></a>
+                    <a href=""><p style="font-family: Calibri; font-size: large; color: #342F2F; text-align: center">+38(066)55-44-333 (Viber)</p></a>
                 </div>
             </span>
         </div>
@@ -113,8 +115,9 @@
 {% block buket %}{% endblock %}
 {% block detail_buket %}{% endblock %}
 {% block chocolate %}{% endblock %}
-{% block detail_chocolate %}{% endblock %}
-
+{% block detail_chocolat %}{% endblock %}
+{% block air %}{% endblock %}
+{%  block detail_air %}{% endblock %}
 
 <script src="{% static "js/script.js" %}"></script>
 
@@ -152,6 +155,23 @@
         </div>
     </div>
 
+    <script>
+
+
+        $('.open_fast').click(function () { // Описуем что будет происходить по клику на кнопку с класом .open_fast
+            $('.popup_fast').css({"top": $(window).scrollTop() + 220}).addClass('active'); // ccs свойство top, проскроливать + 220
+            var bg_popup = $('.bg_popup');
+            bg_popup.fadeIn(); // fadeIn() - плавно появляется
+            bg_popup.click(function () {   // удаляем при нажати на на люьом месте кроме окна котрое появилось
+            $('.popup_fast').removeClass('active');
+            bg_popup.fadeOut();
+            });
+         });
+
+    </script>
+
+
+
     <style>
         html {
 	height: 100%;
@@ -166,111 +186,11 @@ body {
 }
 
 
-.block__element.top span {
-	display: block;
-   /* border: solid coral;*/
-    width: auto;
-    height: 125px;
-    text-align: center;
-
-}
-
-
-.block.top {
-	/*background: #D8D8D8;*/
-
-	width: 51%;  	/* Ширина Флекс блока*/
-
-	height: 145px;  	/* Высота Флекс блока*/
-
-	margin: 0 auto; /* первый - отступ сверху снизу от блока до родителя, второй по бокам до родителя */
-
-	padding: 15px;  	/* отступ внутри блока от блока к его елементам по всем сторонам*/
-
-
-
-}
-
-.flex-container.top {  /* свойства контейнера*/
-
-
-	display: flex;  				/*для того что бы flex заработал для родителя нужно прописать
-									обязательно flex, все элементы выстраиваются в дну строку и
-									не будут переносится, но можно это отключить свойством nowrap*/
-
-	flex-flow: row wrap; 			/* flex-flow: row nowrap; - значение по умолчанию
-									row - в строку на одной линии все flex-елементы, column - колонка
-								     row-reverse , column-reverse - соответственно реверс.
-								     wrap - перенос, размер согласно .block__element (width: 5%; height: 150px;)
-								     nowrap - нету перноса все сжимается
-								     wrap-reverse - соответственно */
-
-	justify-content: space-around; 	/*  Выравнивание вдоль горизонтальной оси
-										отображенеи елементов, допустим ихи мало:
-									   space-around - растянуть на все строку равномерно
-									   space-between - растянуть на все строку равномерно, но первый и
-									   последний елемент прижат к краю, используется часто
-									   flex-start - елементы со стврта согласно своего размера
-									   flex-end - с конца согласно размера, если нудно сжимаются
-									   center - по центру согласно размера */
-
-
-	align-items: flex-start ;			/*  Выравнивание вдоль вертикальной оси
-										stretch - Занимают все высоту родительского елемента
-										(колонка снизу доверху), но нужно закоментировать /*height: 150px;
-										flex-start - елементы со стврта согласно своего размера
-										flex-end - с конца согласно размера, если нудно сжимаются
-										center - по центру согласно размера
-										baseline - не нужное
-										*/
-
-	align-content: center;   		/* 	Выравнивание списка елементов вдоль вертикальной оси,
-										нужно отключить nowrap, когда много елеменов, и хи нужно
-										упорядочмть как строки.
-										stretch - Занимают все высоту родительского елемента
-										space-around - растянуть на все строку равномерно
-									   	space-between - растянуть на все строку равномерно, но первый и
-									   	последний елемент прижат к краю, используется часто
-									   	flex-start - елементы со стврта согласно своего размера
-									   	flex-end - с конца согласно размера, если нужно сжимаются
-									   	center - по центру согласно размера */
-}
-
-.flex-element.top  {  /* свойства елемента*/
-
-	/* order: 0;               /* сортировка - с помощью цыфры елементу присваивается номер
-					            <div class="block__element flex-element"  style="order: 1">*/
-
-	/* flex-grow: 0;       /* растягтвание flex елемента, можно один или несколько сделать длинее
-							 если 1 то он будет растянут на 50% по строке, все остальные на 50%
-							 если 2, то по 25% = 50%, , все остальные на 50, и т.д.% */
-
-	/*flex-shrink: 1;     /* сужение флех елементв, все узкие один широкий,
-						   значения 1 или 0 */
-
-	/* flex-basis: 100px; /* фиксированое растягивание определенного елемента, 240px
-						  margin: 1px; , если указать для одного елемента то
-						  в контейнере все тянется, а наш елемент фиксированый*/
-
-	/*flex:; 1 0 auto;    /* - можно записать значение преведущих трех елементов */
-
-	/* align-self: auto;	/* свойства елемента*/
-}
-
-
-/* flex mid - блок меню номер 2*/
-
-
-
-
-
-
 /* Логотип на главной странице */
 .img-fluid.logo {
     width: 100%;
     height: auto;
 }
-
 
 
 /* Таблица с елементами в строку */
@@ -297,7 +217,6 @@ ul.hr.menu li a {
 	font-size: 10px;
 }
 
-
 ul.hr li a {
 	color: white;
 	font-size: 12px;
@@ -310,10 +229,7 @@ ul.hr.menu{
 }
 
 
-
-
 /* Global */
-
 
 a {
 	-webkit-transition: all 150ms ease;
@@ -430,22 +346,6 @@ a {
     }
 }
 
-
-/*!* ADD-ON*/
-/*-------------------------------------------------- *!*/
-/*body:after{content:"less than 320px";font-size:1rem;font-weight:bold;position:fixed;bottom:0;width:100%;text-align:center;background-color:hsla(1,60%,40%,0.7);color:#fff;height:20px;padding-top:0;margin-left:0;left:0}@media only screen and (min-width:320px){body:after{content:"320 to 480px";background-color:hsla(90,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:480px){body:after{content:"480 to 768px";background-color:hsla(180,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:768px){body:after{content:"768 to 980px";background-color:hsla(270,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:980px){body:after{content:"980 to 1024px";background-color:hsla(300,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:1024px){body:after{content:"1024 and up";background-color:hsla(360,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}*/
-
-/*::selection { background: #ff5e99; color: #FFFFFF; text-shadow: 0; }*/
-/*::-moz-selection { background: #ff5e99; color: #FFFFFF; }*/
-
-/*a, a:focus, a:active, a:hover, object, embed { outline: none; }*/
-/*:-moz-any-link:focus { outline: none; }*/
-/*input::-moz-focus-inner { border: 0; }*/
-
-
-
-
-
 .carousel-inner ul li p {
     color: darkred;
 }
@@ -512,5 +412,6 @@ body {
 
     </style>
 
-</body>
+
+    </body>
 </html>

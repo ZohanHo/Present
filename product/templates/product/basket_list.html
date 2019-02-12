@@ -12,13 +12,11 @@
     <div class="row" style="padding-top: 10px">
         <div style="" class="col-md-2 offset-2">
             <ul style="margin: 10px;">
-                <li class="buket-li"><a class="buket-a" href="">Подарочные корзины для мужчин</a></li>
-                <li class="buket-li"><a class="buket-a" href="">С днем рождения</a></li>
-                <li class="buket-li"><a class="buket-a" href="">Поправляйся!</a></li>
-                <li class="buket-li"><a class="buket-a" href="">Любовь и романтика</a></li>
-                <li class="buket-li"><a class="buket-a" href="">Бизнес подарки</a></li>
+                <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="{% url "bith_basket" %}">С днем рождения</a></li>
+                <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="{% url "love_basket" %}">Любовь и романтика</a></li>
+                <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="{% url "bisnes_basket" %}">Бизнес подарки</a></li>
                 <br>
-                <li class="buket-li"><a class="buket-a" href="">ВОЗДУШНЫЕ ШАРИКИ</a></li>
+                <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="">ВОЗДУШНЫЕ ШАРИКИ</a></li>
             </ul>
             <br>
                 <img class="" src="{% static 'images/present.jpg' %}" alt="" style="width: 100%;">
@@ -38,7 +36,7 @@
                      {% for foo in page %}
                         <div style="text-align: center; margin: 2.5px 2px 2.5px;  border: solid 1px grey;" class="col-md-3">
                             <a href="{{ foo.get_absolute_url_basket }}"><img class="" src="{{ foo.image.url }}" alt="" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px"></a>
-                            <div style="margin-top: 8px">
+                            <div style="margin-top: 8px; height: 17px">
                                 <span style="">{{ foo.product_name }}</span>
                             </div>
 
@@ -46,7 +44,7 @@
                             <div>
                                 <span style="color: maroon; font-size: small">{{ foo.price }} UAH</span>
                             </div>
-                            <button style="padding: 3px;padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button>
+                            <a href="{{ foo.get_absolute_url_basket }}"><button style="padding: 3px;padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button></a>
                         </div>
                     {% endfor %}
                 </div>

@@ -148,3 +148,22 @@ class Chocolate(models.Model):
     def get_absolute_url_chocolate(self):
         return reverse("chocolate_url", kwargs={"pk": self.pk})
 
+
+class Air(models.Model):
+    product_name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    date = models.DateTimeField(auto_now_add=True, auto_now=False)
+    update = models.DateTimeField(auto_now=True, auto_now_add=False)
+    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to="static/images/", default="")
+    category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
+
+    def __str__(self):
+        return "{}".format(self.product_name)
+
+    class Meta:
+        verbose_name = "Воздушный шарик"
+        verbose_name_plural = "Воздушные шарики"
+
+    def get_absolute_url_air(self):
+        return reverse("air_url", kwargs={"pk": self.pk})

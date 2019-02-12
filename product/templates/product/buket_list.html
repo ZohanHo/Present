@@ -26,10 +26,13 @@
             <img class="" src="{% static 'images/bord.png' %}" alt="" style="width: 110%;">
 
         </div>
+
         <div style="" class="col-md-8   ">
             <div class="container">
                 <div class="row">
-                <div><img class="" src="{% static 'images/all.jpg' %}" alt="" style="width: 76.5%; "></div>
+                <div>
+                    <img class="" src="{% static 'images/all.jpg' %}" alt="" style="width: 76.5%; ">
+                </div>
                 <div>
                     <h5 style="padding-top: 12px; color: orange">ФРУКТОВЫЕ БУКЕТЫ</h5>
                     <p style="width: 76.5%;padding-top: 5px">Выберите букет из фруктов на свой вкус. Свежие, сочные фруктовые букеты - это эксклюзивный,
@@ -38,15 +41,17 @@
                      {% for foo in page %}
                         <div style="text-align: center; margin: 2.5px 2px 2.5px;  border: solid 1px grey;" class="col-md-3">
                             <a href="{{ foo.get_absolute_url_buket }}"><img class="" src="{{ foo.image_product.url }}" alt="" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px"></a>
-                            <div style="margin-top: 8px">
+                            <div style="margin-top: 8px; height: 17px">
                                 <span style="">{{ foo.product_name }}</span>
                             </div>
 
-                            <br>
+                                <br>
                             <div>
                                 <span style="color: maroon; font-size: small">{{ foo.price }} UAH</span>
                             </div>
-                            <button style="padding: 3px;padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button>
+                            <div style="">
+                            <a href="{{ foo.get_absolute_url_buket }}"><button style="padding: 3px; padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button></a>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

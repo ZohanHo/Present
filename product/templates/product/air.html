@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block air %}
+
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div style="background-color: #F3F3F3" class="col-md-8  offset-2">
+
+
+                {% for foo in air  %}
+                    <div class="col-md-3" style="text-align: center; margin: 15px 30px 15px; padding: 5px; border: solid 1px grey; background-color: #FEFEFE; width: 100%" >
+
+
+                            <div style="">
+                                <a href="{{ foo.get_absolute_url_air }}"><img class="" src="{{ foo.image.url }}" alt="" style=" text-align: center; width: 100%"></a>
+                            </div>
+
+                            <div style="margin-top: 3px; height: 10px; text-align: center; font-weight: 500; font-size: large; color: dodgerblue">
+                                <span>{{ foo.product_name }}</span>
+                            </div>
+                                <br>
+                            <div>
+                                <span style="color: maroon; font-size: small">{{ foo.price }} UAH</span>
+                            </div>
+                            <div style="{{ foo.get_absolute_url_air }}">
+                                <a href=""><button style="font-size: small; padding: 3px; padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button></a>
+                            </div>
+
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+t
+
+
+
+{% endblock %}
+
+

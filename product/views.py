@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate
+from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate, Air
 from django.core.paginator import Paginator
 
 from django.views.generic import *
@@ -65,7 +65,7 @@ def action(request):
 
 class ListViewBuket(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         buket = Buket.objects.all()
@@ -94,7 +94,7 @@ class ListViewBuket(ListView):
 
 class ListViewBuketBith(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         birth = Buket.objects.filter(category__name__iexact="На день рождения")
@@ -221,7 +221,7 @@ class DetailViewChocolate(DetailView):
         context = super(DetailViewChocolate, self).get_context_data(**kwargs)
         context["chocolate"] = chocolate
         context["companion"] = compabion
-
+        return context
 
 def pay(request):
     return render(request, "product/pay.html", context={})
@@ -231,7 +231,7 @@ def delivery(request):
 
 class ListViewBuketBisnes(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         bisnes = Buket.objects.filter(category__name__iexact="Бизнес подарки")
@@ -258,7 +258,7 @@ class ListViewBuketBisnes(ListView):
 
 class ListViewBuketYear(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         year = Buket.objects.filter(category__name__iexact="Букет на годовщину")
@@ -285,7 +285,7 @@ class ListViewBuketYear(ListView):
 
 class ListViewBuketMen(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         men= Buket.objects.filter(category__name__iexact="Для мужчин")
@@ -312,7 +312,7 @@ class ListViewBuketMen(ListView):
 
 class ListViewBuketMama(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         mama= Buket.objects.filter(category__name__iexact="Букет для мамы")
@@ -339,7 +339,7 @@ class ListViewBuketMama(ListView):
 
 class ListViewBuketLove(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         love = Buket.objects.filter(category__name__iexact="Любимым")
@@ -366,7 +366,7 @@ class ListViewBuketLove(ListView):
 
 class ListViewBuketKids(ListView):
     model = Buket
-    template_name = "product/buket.html"
+    template_name = "product/buket_list.html"
 
     def get_context_data(self, **kwargs):
         kids = Buket.objects.filter(category__name__iexact="Детские букеты")
@@ -390,3 +390,165 @@ class ListViewBuketKids(ListView):
         context["prev_url"] = prev_url
         context["next_url"] = next_url
         return context
+
+    # Basket
+
+class ListViewBasketLove(ListView):
+    model = Basket
+    template_name = "product/basket_list.html"
+
+    def get_context_data(self, **kwargs):
+        love = Basket.objects.filter(category__name__iexact="Любимым")
+        # Paginator
+        paginator = Paginator(love, 9)
+        page_number = self.request.GET.get("page")
+        page = paginator.get_page(page_number)
+        is_paginated = page.has_other_pages()
+        if page.has_previous():
+            prev_url = "?page={}".format(page.previous_page_number())
+        else:
+            prev_url = ""
+        if page.has_next():
+            next_url = "?page={}".format(page.next_page_number())
+        else:
+            next_url = ""
+        context = super(ListViewBasketLove, self).get_context_data(**kwargs)
+        context["love"] = love
+        context["page"] = page
+        context["is_paginated"] = is_paginated
+        context["prev_url"] = prev_url
+        context["next_url"] = next_url
+        return context
+
+class ListViewBasketBith(ListView):
+    model = Basket
+    template_name = "product/basket_list.html"
+
+    def get_context_data(self, **kwargs):
+        love = Basket.objects.filter(category__name__iexact="Бизнес подарки")
+        # Paginator
+        paginator = Paginator(love, 9)
+        page_number = self.request.GET.get("page")
+        page = paginator.get_page(page_number)
+        is_paginated = page.has_other_pages()
+        if page.has_previous():
+            prev_url = "?page={}".format(page.previous_page_number())
+        else:
+            prev_url = ""
+        if page.has_next():
+            next_url = "?page={}".format(page.next_page_number())
+        else:
+            next_url = ""
+        context = super(ListViewBasketBith, self).get_context_data(**kwargs)
+        context["love"] = love
+        context["page"] = page
+        context["is_paginated"] = is_paginated
+        context["prev_url"] = prev_url
+        context["next_url"] = next_url
+        return context
+
+class ListViewBasketBisnes(ListView):
+    model = Basket
+    template_name = "product/basket_list.html"
+
+    def get_context_data(self, **kwargs):
+        love = Basket.objects.filter(category__name__iexact="На день рождения")
+        # Paginator
+        paginator = Paginator(love, 9)
+        page_number = self.request.GET.get("page")
+        page = paginator.get_page(page_number)
+        is_paginated = page.has_other_pages()
+        if page.has_previous():
+            prev_url = "?page={}".format(page.previous_page_number())
+        else:
+            prev_url = ""
+        if page.has_next():
+            next_url = "?page={}".format(page.next_page_number())
+        else:
+            next_url = ""
+        context = super(ListViewBasketBisnes, self).get_context_data(**kwargs)
+        context["love"] = love
+        context["page"] = page
+        context["is_paginated"] = is_paginated
+        context["prev_url"] = prev_url
+        context["next_url"] = next_url
+        return context
+
+class ListViewChocolateFructs(ListView):
+    model = Chocolate
+    template_name = "product/chocolate_list.html"
+
+    def get_context_data(self, **kwargs):
+        love = Chocolate.objects.filter(category__name__iexact="Фрукты в шоколаде")
+        # Paginator
+        paginator = Paginator(love, 9)
+        page_number = self.request.GET.get("page")
+        page = paginator.get_page(page_number)
+        is_paginated = page.has_other_pages()
+        if page.has_previous():
+            prev_url = "?page={}".format(page.previous_page_number())
+        else:
+            prev_url = ""
+        if page.has_next():
+            next_url = "?page={}".format(page.next_page_number())
+        else:
+            next_url = ""
+        context = super(ListViewChocolateFructs, self).get_context_data(**kwargs)
+        context["love"] = love
+        context["page"] = page
+        context["is_paginated"] = is_paginated
+        context["prev_url"] = prev_url
+        context["next_url"] = next_url
+        return context
+
+class ListViewChocolateChery(ListView):
+    model = Chocolate
+    template_name = "product/chocolate_list.html"
+
+    def get_context_data(self, **kwargs):
+        love = Chocolate.objects.filter(category__name__iexact="Клубника в шоколаде")
+        # Paginator
+        paginator = Paginator(love, 9)
+        page_number = self.request.GET.get("page")
+        page = paginator.get_page(page_number)
+        is_paginated = page.has_other_pages()
+        if page.has_previous():
+            prev_url = "?page={}".format(page.previous_page_number())
+        else:
+            prev_url = ""
+        if page.has_next():
+            next_url = "?page={}".format(page.next_page_number())
+        else:
+            next_url = ""
+        context = super(ListViewChocolateChery, self).get_context_data(**kwargs)
+        context["love"] = love
+        context["page"] = page
+        context["is_paginated"] = is_paginated
+        context["prev_url"] = prev_url
+        context["next_url"] = next_url
+        return context
+
+class ListViewAir(ListView):
+    model = Air
+    template_name = "product/air.html"
+
+    def get_context_data(self, **kwargs):
+        air = Air.objects.all()
+        context = super(ListViewAir, self).get_context_data(**kwargs)
+        context["air"] = air
+        return context
+
+class DetailViewAir(DetailView):
+    model = Air
+    template_name = "product/card_detail_air.html"
+
+    def get_context_data(self, **kwargs):
+        air = Air.objects.all()
+        compabion = ProductCompanion.objects.all()
+        context = super(DetailViewAir, self).get_context_data(**kwargs)
+        context["air"] = air
+        context["companion"] = compabion
+        return context
+
+def contact(request):
+    return render(request, "product/contact.html", context={})

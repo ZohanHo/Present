@@ -5,8 +5,3 @@
     })
    });
 
-
-// function smoll() {
-//     var price_form = document.getElementById('price_form');
-//     price_form.innerHTML = "1500"
-// }

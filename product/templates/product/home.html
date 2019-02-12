@@ -76,9 +76,9 @@
             </div>
             <div  style=" background-color: #FFFFFF" class="col-md-2">
                 <span style="text-align: center;">
-                   <a href=""><img class="img-fluid logo" style="margin-top: 10px" src="{% static "media/images/landing/ballon-005-min.jpg" %}" alt="logo"></a>
+                   <a href="{% url "air" %}"><img class="img-fluid logo" style="margin-top: 10px" src="{% static "media/images/landing/ballon-005-min.jpg" %}" alt="logo"></a>
                     <ul style="margin: 0">
-                        <li><a style="color: #65696D;" href=""><p style="font-size: x-small; margin-bottom: 1px; text-align: left">ВОЗДУШНЫЕ ШАРИКИ</p></a></li>
+                        <li><a style="color: #65696D;" href="{% url "air" %}"><p style="font-size: x-small; margin-bottom: 1px; text-align: left">ВОЗДУШНЫЕ ШАРИКИ</p></a></li>
                         <li> <p style="font-size: x-small; color: #65696D; text-align: left; margin: 0"><a style=" color: #65696D" href="">БЛОГ</a></p></li>
                     </ul>
                     <a href="https://www.facebook.com/frutado.com.ua?fref=ts"><img style="width: 30%" class="" src="{% static "media/images/social/facebook.png" %}" alt="logo"></a>
@@ -208,6 +208,89 @@
 
     <br>
     <br>
+
+
+
+     <!-- всплываюшее окно - popup дендинговой страницы  -->
+        <div class="popup_fast" style="">
+            <div class="form">
+                <form id="action" action="{% url "action" %}" method="post">{% csrf_token %}
+                    <span class="span_name" style="">Ваше имя</span>
+                    <div class="input_name"><input class="input_name" type="text" name="name_input" title="" value="" form="action" placeholder="Имя"></div>
+                    <span class="span_phone" style="margin-left: 20%">Контактный телефон</span>
+                    <div class="input_phone"><input class="input_phone" type="text" name="name_input" title="" value="" form="action" placeholder="Телефон"></div>
+                    <div class="input_name"><button class="btn-warning buton_popup" form="action">Отправить</button></div>
+
+                </form>
+            </div>
+        </div>
+        <div class="bg_popup" style=""></div>
+
+    <style>
+.popup_fast {
+width: 280px;  /* ширина окна popup */
+height: 190px; /* высота окна popup */
+background: #F9F1E6;
+z-index: 100; /* поверх всех елементов на странице */
+padding: 23px 0 0 0;
+position: absolute; top: 25%;
+left: 0;
+right: 0;
+margin: auto; /* оцентровка по центру */
+border-radius: 15px;
+border: solid 1px grey;
+display: none; /* изначально скрыт */
+/*@include transform(translate(-1000px)); !* вылазит сбоку *!*/
+/*@inclue transition(.4s)*/
+}
+
+
+.popup_fast.active   {
+    display: block;
+    /*@include transform(translate(0px));*/
+}
+
+.bg_popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: rgba(0, 0, 0, .7);
+    display: none;
+}
+
+.input_name {
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.input_phone {
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.buton_popup {
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 8px 5px;
+    margin-top: 5px;
+}
+
+.span_name {
+    margin-left: 20%;
+
+}
+
+.span_phone{
+    margin-left: 20%;
+}
+</style>
 
 
 
