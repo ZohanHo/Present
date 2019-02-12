@@ -8,7 +8,6 @@
 
 //popup
 $('.open_fast').click(function () { // Описуем что будет происходить по клику на кнопку с класом .open_fast
-    console.log('ok');
     $('.popup_fast').css({"top": $(window).scrollTop() + 220}).addClass('active'); // ccs свойство top, проскроливать + 220
     var bg_popup = $('.bg_popup');
     bg_popup.fadeIn(); // fadeIn() - плавно появляется

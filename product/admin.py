@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Product
-from .models import ProductCompanion, SizeProd, Recording, Buket, Basket, CategoryProduct, Chocolate, Air
+from .models import ProductCompanion, SizeProd, Recording, Buket, Basket, CategoryProduct, Chocolate, Air, Contact
 
 class CategoryProductAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Product._meta.fields]
@@ -79,6 +79,14 @@ class AirAdmin(admin.ModelAdmin):
 
 admin.site.register(Air,  AirAdmin)
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Contact._meta.fields]
+
+
+    class Meta:
+        model = Contact
+
+admin.site.register(Contact,  ContactAdmin)
 
 
 admin.site.register(Recording)

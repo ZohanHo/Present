@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 
 {%  block detail_buket %}
@@ -34,22 +36,37 @@
                 <span>Цена с опциями: </span><span id="price_span2">{{ object.price }} </span><span> UAH</span>
                  <hr>
 
-                <!-- inout количества товара -->
-
-                 <div class="quantity-block">
-                        <button class="quantity-arrow-minus"> - </button>
-                            <input style="width: 10%; text-align: center" class="quantity-num" type="number" value="1" maxlength="100" title="quantity-num"/>
-                        <button class="quantity-arrow-plus"> + </button>
-                    <button style="color: white; border-radius: 5px; " class="btn btn-warning">В КОРЗИНУ</button>
+                <!-- input добавить товат в корзину -->
+                <form id="basket_add" action="{% url "test" %}" method="Post">{% csrf_token %}</form>
+                <div class="quantity-block">
+                    <button class="quantity-arrow-minus"> - </button>
+                        <input name="basket_add" style="width: 10%; text-align: center" class="quantity-num" type="number" value="1" maxlength="100" title="Количество" form="basket_add"/>
+                    <button class="quantity-arrow-plus"> + </button>
+                <button style="color: white; border-radius: 5px;" class="btn btn-warning btn-bay" form="basket_add" type="submit">В КОРЗИНУ</button>
                 </div>
+
             </div>
         </div>
     </div>
 
 
-    
+
     
 <!-- цена в деталке по количеству килограм -->
+    <script>
+    //Basket
+
+    $(document).ready(function () {    //скрипт загрузится после того как загрузится вся страница html
+        var form = $('#basket_add');   //выбираем используя селектор ID формы
+        connsole.log(form)
+    });
+
+
+    //EndBasket
+    </script>
+
+
+
     <script>
 
         var checkbox1 = $('#s');
@@ -131,11 +148,11 @@
 
     </script>
 
-    <script>
-        // <!-- inout количества товара -->
-            $(function() {
 
-          (function quantityProducts() {
+
+    <script>
+        // <!-- input количества товара -->
+            $(function() {(function quantityProducts() {
             var $quantityArrowMinus = $(".quantity-arrow-minus");
             var $quantityArrowPlus = $(".quantity-arrow-plus");
             var $quantityNum = $(".quantity-num");
@@ -152,9 +169,10 @@
             function quantityPlus() {
               $quantityNum.val(+$quantityNum.val() + 1);
             }
-          })();
+            })
+            ();
 
-        });
+            });
     </script>
 
 

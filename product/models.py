@@ -167,3 +167,14 @@ class Air(models.Model):
 
     def get_absolute_url_air(self):
         return reverse("air_url", kwargs={"pk": self.pk})
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    phone = models.CharField(max_length=100, blank=False)
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+    class Meta:
+        verbose_name = "Контакт"
+        verbose_name_plural = "контакты"

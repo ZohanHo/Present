@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Магазин подарков - Banana</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 
         <!-- Latest compiled and minified CSS -->
@@ -19,14 +19,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-
         <!-- jquery 2.2.0-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-
-        <!-- bootstrap/2.3.1 с плагина
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css"></script>
-        -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -35,7 +30,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"></script>
 
         <!--footer-->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 
@@ -44,9 +39,9 @@
          <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 
-
         <!-- static - styles.css, наш фаил со стилями должен быть ниже стилей bootstrap. что бы в нашем можно было переопредилить-->
-        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "css/style.css"  %}">
+
 
 </head>
 <body>
@@ -101,7 +96,7 @@
                        <li><a href="{% url "chocolate" %}">ФРУКТЫ В ШОКОЛАДЕ</a></li>
                        <li><a href="">АКЦИИ</a></li>
                        <li><a href="">14 ФЕВРАЛЯ</a></li>
-                       <li style="border: solid orange"><a href="">Корзина пуста</a></li>
+                       <li style="border: solid orange 1px"><a href="">Корзина пуста</a></li>
                     </ul>
                 </span>
             </div>
@@ -118,6 +113,7 @@
 {% block detail_chocolat %}{% endblock %}
 {% block air %}{% endblock %}
 {%  block detail_air %}{% endblock %}
+{% block form_submit %}{% endblock %}
 
 <script src="{% static "js/script.js" %}"></script>
 
@@ -155,214 +151,199 @@
         </div>
     </div>
 
-    <script>
 
 
-        $('.open_fast').click(function () { // Описуем что будет происходить по клику на кнопку с класом .open_fast
-            $('.popup_fast').css({"top": $(window).scrollTop() + 220}).addClass('active'); // ccs свойство top, проскроливать + 220
-            var bg_popup = $('.bg_popup');
-            bg_popup.fadeIn(); // fadeIn() - плавно появляется
-            bg_popup.click(function () {   // удаляем при нажати на на люьом месте кроме окна котрое появилось
-            $('.popup_fast').removeClass('active');
-            bg_popup.fadeOut();
-            });
-         });
-
-    </script>
-
-
-
-    <style>
-        html {
-	height: 100%;
+<style>
+html {
+height: 100%;
 }
 
 body {
-	display: flex;
-	display: -webkit-flex;
-	flex-direction: column;
-	-webkit-flex-direction: column;
-	font-family: Tahoma, Arial, sans-serif;
+display: flex;
+display: -webkit-flex;
+flex-direction: column;
+-webkit-flex-direction: column;
+font-family: Tahoma, Arial, sans-serif;
 }
 
 
 /* Логотип на главной странице */
 .img-fluid.logo {
-    width: 100%;
-    height: auto;
+width: 100%;
+height: auto;
 }
 
 
 /* Таблица с елементами в строку */
 ul.hr {
-	text-align: start;
-    margin: 0; /* Обнуляем значение отступов */
-    padding: 0; /* Значение полей */
+text-align: start;
+margin: 0; /* Обнуляем значение отступов */
+padding: 0; /* Значение полей */
 
 }
 
 ul.hr li {
-	font-size: smaller;
-    display: inline; /* Отображать как строчный элемент */
-    margin-right: 7px; /* Отступ слева */
+font-size: smaller;
+display: inline; /* Отображать как строчный элемент */
+margin-right: 7px; /* Отступ слева */
 
-    /*border: 1px solid #000; /* Рамка вокруг текста */
-    padding: 1px; /* Поля вокруг текста */
+/*border: 1px solid #000; /* Рамка вокруг текста */
+padding: 1px; /* Поля вокруг текста */
 }
 
 /* Меню ru ua*/
 
 ul.hr.menu li a {
-	color: grey;
-	font-size: 10px;
+color: grey;
+font-size: 10px;
 }
 
 ul.hr li a {
-	color: white;
-	font-size: 12px;
+color: white;
+font-size: 12px;
 
 }
 
 ul.hr.menu{
-	text-align: center;
-	margin: 0; /* Обнуляем значение отступов */
+text-align: center;
+margin: 0; /* Обнуляем значение отступов */
 }
 
 
 /* Global */
 
 a {
-	-webkit-transition: all 150ms ease;
-	-moz-transition: all 150ms ease;
-	-ms-transition: all 150ms ease;
-	-o-transition: all 150ms ease;
-	transition: all 150ms ease;
-	}
-    a:hover {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */
-        filter: alpha(opacity=50); /* IE7 */
-        opacity: 0.6;
-        text-decoration: none;
-    }
+-webkit-transition: all 150ms ease;
+-moz-transition: all 150ms ease;
+-ms-transition: all 150ms ease;
+-o-transition: all 150ms ease;
+transition: all 150ms ease;
+}
+a:hover {
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */
+filter: alpha(opacity=50); /* IE7 */
+opacity: 0.6;
+text-decoration: none;
+}
 
 
 /* Container */
 .container-fluid {
-    background: #FFFFFF;
-    margin: 40px auto 25px;
-    padding: 20px 1px 15px;
-    max-width: 755px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+background: #FFFFFF;
+margin: 40px auto 25px;
+padding: 20px 1px 15px;
+max-width: 755px;
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 
 /* Page Header (шапка) */
 .page-header {
-    background: #f9f9f9;
-    margin: -60px -15px 20px; /* верх,  право-лево, низ */
-    padding: 20px 30px;
-    border-top: 4px solid #ccc;
+background: #f9f9f9;
+margin: -60px -15px 20px; /* верх,  право-лево, низ */
+padding: 20px 30px;
+border-top: 4px solid #ccc;
 
-    text-transform: uppercase;
+text-transform: uppercase;
 
-    }
-    .page-header h3 {
-        line-height: 0.88rem;
-        text-align: center;
-        color: orange;
-        }
+}
+.page-header h3 {
+line-height: 0.88rem;
+text-align: center;
+color: orange;
+}
 
-    .page-header p {
-        text-align: center;
-        color: grey;
-    }
+.page-header p {
+text-align: center;
+color: grey;
+}
 
 
 /* Thumbnail Box */
-    .caption h4 {
-    font-size: 1.3rem;
-    color: #444;
+.caption h4 {
+font-size: 1.3rem;
+color: #444;
 
+}
+.caption p {
+font-size: 1.2rem;
+color: #999;
+}
+.btn.btn-mini {
+    font-size: 0.63rem;
     }
-    .caption p {
-        font-size: 1.2rem;
-        color: #999;
-        }
-        .btn.btn-mini {
-            font-size: 0.63rem;
-            }
 
 
 /* Carousel Control */
-    .control-box {
-    text-align: right;
-    width: 100%;
-    }
-    .carousel-control{
+.control-box {
+text-align: right;
+width: 100%;
+}
+.carousel-control{
 
-        border: 0;
-        border-radius: 0;
-        display: inline-block;
-        font-size: 34px;
-        font-weight: 200;
-        line-height: 18px;
-        opacity: 1;
-        padding: 4px 10px 0;
-        position: absolute;
-        height: 30px;
-        width: 15px;
-        }
+border: 0;
+border-radius: 0;
+display: inline-block;
+font-size: 34px;
+font-weight: 200;
+line-height: 18px;
+opacity: 1;
+padding: 4px 10px 0;
+position: absolute;
+height: 30px;
+width: 15px;
+}
 
-    .item ul li {
-    color: #FFFFFF;
-    text-align: center;
+.item ul li {
+color: #FFFFFF;
+text-align: center;
 }
 
 /* Footer */
 .footer {
-    margin: auto;
-    width: 100%;
-    max-width: 960px;
-    display: block;
-    font-size: 0.69rem;
+margin: auto;
+width: 100%;
+max-width: 960px;
+display: block;
+font-size: 0.69rem;
+}
+.footer, .footer a {
+color: #c9e4f7;
+}
+p.right  {
+    float: right;
     }
-    .footer, .footer a {
-        color: #c9e4f7;
-        }
-        p.right  {
-            float: right;
-            }
 
 
 /* Mobile Only */
 @media (max-width: 767px) {
-    .page-header, .control-box {
-    text-align: center;
-    }
+.page-header, .control-box {
+text-align: center;
+}
 }
 @media (max-width: 479px) {
-    .caption {
-    word-break: break-all;
-    }
+.caption {
+word-break: break-all;
+}
 }
 
 .carousel-inner ul li p {
-    color: darkred;
+color: darkred;
 }
 
 .carousel-inner ul li h5 {
-    color: #65696D;
+color: #65696D;
 
 }
 
 
- .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='grey' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+.carousel-control-prev-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='grey' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
 }
 
 
- .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='grey' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+.carousel-control-next-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='grey' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
 
@@ -370,48 +351,49 @@ a {
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+margin: 0;
 }
 input[type="number"] {
-  -moz-appearance: textfield;
+-moz-appearance: textfield;
 }
 
 /* not necessary*/
 * {
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
 }
 body {
-  display: flex;
-  min-height: 100vh;
+display: flex;
+min-height: 100vh;
 }
 .quantity-block {
-  font-size: 20px;
+font-size: 20px;
 
 }
 .quantity-arrow-minus,
 .quantity-arrow-plus {
-  cursor: pointer;
-  font-size: 10px;
-  padding: 1px 1px;
-  width: 20px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  outline: none;
+cursor: pointer;
+font-size: 10px;
+padding: 1px 1px;
+width: 20px;
+box-sizing: border-box;
+border-radius: 4px;
+outline: none;
 }
 .quantity-num {
-  font-size: 12px;
-  padding: 0 5px;
-  border-radius: 15px;
-  outline: none;
+font-size: 12px;
+padding: 0 5px;
+border-radius: 15px;
+outline: none;
 
 }
 
-    </style>
+</style>
 
+<script src="{% static "js/script.js" %}"></script>
 
     </body>
 </html>
