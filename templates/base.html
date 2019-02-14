@@ -153,19 +153,31 @@
 
 
      <!-- всплываюшее окно - popup дендинговой страницы  -->
-        <div class="popup_fast" style="">
-            <div class="form">
-                <form id="form_popup" action="{% url "form_popup" %}" method="post">{% csrf_token %}
-                    <span class="span_name" style="">Ваше имя</span>
-                    <div class="input_name"><input class="input_name" type="text" name="name_input" title="" value="" form="form_popup" placeholder="Имя"></div>
-                    <span class="span_phone" style="margin-left: 20%">Контактный телефон</span>
-                    <div class="input_phone"><input class="input_phone" type="text" name="name_phone" title="" value="" form="form_popup" placeholder="Телефон"></div>
-                    <div class="input_name"><button class="btn-warning buton_popup" form="form_popup">Отправить</button></div>
+{#        <div class="popup_fast" style="">#}
+{#            <div class="form">#}
+{#                <form id="form_popup" action="{% url "form_popup" %}" method="post">{% csrf_token %}#}
+{#                    <span class="span_name" style="">Ваше имя</span>#}
+{#                    <div class="input_name"><input class="input_name" type="text" name="name_input" title="" value="" form="form_popup" placeholder="Имя"></div>#}
+{#                    <span class="span_phone" style="margin-left: 20%">Контактный телефон</span>#}
+{#                    <div class="input_phone"><input class="input_phone" type="text" name="name_phone" title="" value="" form="form_popup" placeholder="Телефон"></div>#}
+{#                    <div class="input_name"><button class="btn-warning buton_popup" form="form_popup">Отправить</button></div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="bg_popup" style=""></div>#}
 
-                </form>
-            </div>
-        </div>
-        <div class="bg_popup" style=""></div>
+
+ <div>
+        <form id="form_popup" action="{% url "form_popup" %}" method="post">{% csrf_token %}
+
+            {{ form.name }}
+
+
+            <button class="btn-warning buton_popup" form="form_popup">Отправить</button>
+        </form>
+    </div>
+
+
 
 <script src="{% static "js/script.js" %}"></script>
 

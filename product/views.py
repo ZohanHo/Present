@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate, Air, Contact
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
+from .forms import PopupForm
 
 from django.views.generic import *
 
@@ -555,17 +557,19 @@ def contact(request):
 
 
 def contactPopup(request):
-    post = request.POST  # весь масив пост
+    if request.method == 'POST':
+        form = PopupForm(request.POST)
+        if form.is_valid():
+            # cont = form.save(commit=False)
+            # cont.name = form.data['name']
+            # cont.phone = form.data['phone']
+            # cont.save()
+            return redirect('/')
+    else:
 
-    name = post["name_input"]  # Считали значение с NAME у инпута, передаем значение в контекст, который выводим на екран !!!!
-    phone = post["name_phone"]  # Считали значение с NAME у инпута, передаем значение в контекст, который выводим на екран !!!!
+        form = PopupForm()
 
-
-    obj, created = Contact.objects.get_or_create(name=name, phone=phone)
-    obj.save()
-
-    return render(request, "product/sale_basket.html", context={})
-
+    return render(request, "base.html", context={'form': form})
 
 
 class ListViewBasketBay(TemplateView):
@@ -578,7 +582,6 @@ class ListViewBasketBay(TemplateView):
         quantity = post["basket_add"]
 
         return render(request, "product/sale_basket.html", context={})
-
 
 
 
