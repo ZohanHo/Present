@@ -357,23 +357,28 @@ body {
 
 }
 
-.popup_fast {
-width: 280px;  /* ширина окна popup */
-height: 190px; /* высота окна popup */
-background: #F9F1E6;
-z-index: 100; /* поверх всех елементов на странице */
-padding: 23px 0 0 0;
-position: absolute; top: 25%;
-left: 0;
-right: 0;
-margin: auto; /* оцентровка по центру */
-border-radius: 15px;
-border: solid 1px grey;
-display: none; /* изначально скрыт */
-/*@include transform(translate(-1000px)); !* вылазит сбоку *!*/
-/*@inclue transition(.4s)*/
-}
 
+
+
+
+
+/* popup */
+.popup_fast {
+    width: 280px;  /* ширина окна popup */
+    height: 190px; /* высота окна popup */
+    background: #F9F1E6;
+    z-index: 100; /* поверх всех елементов на странице */
+    padding: 23px 0 0 0;
+    position: absolute; top: 25%;
+    left: 0;
+    right: 0;
+    margin: auto; /* оцентровка по центру */
+    border-radius: 15px;
+    border: solid 1px grey;
+    display: none; /* изначально скрыт */
+    /*@include transform(translate(-1000px)); !* вылазит сбоку *!*/
+    /*@inclue transition(.4s)*/
+}
 
 .popup_fast.active   {
     display: block;
@@ -417,6 +422,20 @@ display: none; /* изначально скрыт */
 
 }
 
-.span_phone{
+.span_phone {
     margin-left: 20%;
+}
+
+.test {
+    color: red;
+    font-size: xx-large;
+}
+
+
+/* buket */
+.buket-li {
+        margin-bottom: 12px; font-size: x-small
+    }
+.buket-a {
+    margin: 5px; color: black;
 }

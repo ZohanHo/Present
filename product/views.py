@@ -554,20 +554,17 @@ def contact(request):
     return render(request, "product/contact.html", context={})
 
 
-def ContactPopup(request):
-    post = request.POST or None  # весь масив пост
+def contactPopup(request):
+    post = request.POST  # весь масив пост
 
-    name = post["input_name"]  # Считали значение с NAME у инпута, передаем значение в контекст, который выводим на екран !!!!
-    phone = post["input_phone"]  # Считали значение с NAME у инпута, передаем значение в контекст, который выводим на екран !!!!
+    name = post["name_input"]  # Считали значение с NAME у инпута, передаем значение в контекст, который выводим на екран !!!!
+    phone = post["name_phone"]  # Считали значение с NAME у инпута, передаем значение в контекст, который выводим на екран !!!!
 
-    if name or phone != '':
 
-        # Запись данных с инпута в базу, название базы Recordin, поле rec
-        obj, created = Contact.objects.get_or_create(name=name, phone=phone)
-        obj.save()
+    obj, created = Contact.objects.get_or_create(name=name, phone=phone)
+    obj.save()
 
-    return render(request, "product/popup_submit.html", context={})
-
+    return render(request, "product/sale_basket.html", context={})
 
 
 

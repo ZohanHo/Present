@@ -7,7 +7,6 @@
 
 
 
-
 <div class="container">
     <div class="row" style="padding-top: 10px">
         <div style="" class="col-md-2 offset-2">
@@ -20,7 +19,7 @@
                 <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="{% url "year" %}">Букет на годовщину</a></li>
                 <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="{% url "kids" %}">Для детей</a></li>
                 <br>
-                <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="">ВОЗДУШНЫЕ ШАРИКИ</a></li>
+                <li class="buket-li"><a style="font-weight: 600; color: #65696D" class="buket-a" href="{% url "air" %}">ВОЗДУШНЫЕ ШАРИКИ</a></li>
             </ul>
             <br>
             <img class="" src="{% static 'images/bord.png' %}" alt="" style="width: 110%;">
@@ -50,7 +49,7 @@
                                 <span style="color: maroon; font-size: small">{{ foo.price }} UAH</span>
                             </div>
                             <div style="">
-                            <a href="{{ foo.get_absolute_url_buket }}"><button style="padding: 3px; padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning" form="action">Выбрать</button></a>
+                            <a href="{{ foo.get_absolute_url_buket }}"><button style="padding: 3px; padding-left: 10px; padding-right: 10px; color: #F3F3F3; margin: 5px; border-radius: 3px" class="btn-warning">Выбрать</button></a>
                             </div>
                         </div>
                     {% endfor %}
@@ -92,18 +91,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <style>
-    .buket-li {
-        margin-bottom: 12px; font-size: x-small
-    }
-    .buket-a {
-        margin: 5px; color: black;
-    }
-
-    </style>
 
 
 {% endblock %}
