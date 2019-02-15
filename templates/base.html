@@ -75,7 +75,7 @@
                 <div style="padding-top: 30px;padding-bottom: 20px;padding-left: 30px" >
                     <button style="text-align: center; color: white; font-weight: 200; font-family: sans-serif;font-size: small; margin-bottom: 10px; border-radius: 2px 10px 2px ; padding: 2px 10px 2px" class="btn-warning open_fast" form="">Оставьте номер. Мы перезвоним</button>
                     <p style="font-family: Calibri; font-size: small; text-align: left">ЗАКАЗЫВАЙТЕ ПО ТЕЛЕФОНУ В КИЕВЕ</p>
-                    <a href=""><p style="font-family: Calibri; font-size: large; color: #342F2F; text-align: center">+38(066)55-44-333 (Viber)</p></a>
+                    <p style="font-family: Calibri; font-size: large; color: #342F2F; text-align: center">+38(066)55-44-333 (Viber)</p>
                 </div>
             </span>
         </div>
@@ -151,32 +151,19 @@
         </div>
     </div>
 
-
-     <!-- всплываюшее окно - popup дендинговой страницы  -->
-{#        <div class="popup_fast" style="">#}
-{#            <div class="form">#}
-{#                <form id="form_popup" action="{% url "form_popup" %}" method="post">{% csrf_token %}#}
-{#                    <span class="span_name" style="">Ваше имя</span>#}
-{#                    <div class="input_name"><input class="input_name" type="text" name="name_input" title="" value="" form="form_popup" placeholder="Имя"></div>#}
-{#                    <span class="span_phone" style="margin-left: 20%">Контактный телефон</span>#}
-{#                    <div class="input_phone"><input class="input_phone" type="text" name="name_phone" title="" value="" form="form_popup" placeholder="Телефон"></div>#}
-{#                    <div class="input_name"><button class="btn-warning buton_popup" form="form_popup">Отправить</button></div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="bg_popup" style=""></div>#}
-
-
- <div>
-        <form id="form_popup" action="{% url "form_popup" %}" method="post">{% csrf_token %}
-
-            {{ form.name }}
-
-
-            <button class="btn-warning buton_popup" form="form_popup">Отправить</button>
-        </form>
-    </div>
-
+<!-- всплываюшее окно - popup дендинговой страницы  -->
+        <div class="popup_fast" style="">
+            <div class="form">
+                <form style="margin-top: 10px" id="form_popup" action="{% url 'test' %}" method="post">{% csrf_token %}
+                    <span class="span_name" style="">Ваше имя</span>
+                    <div class="input_name">{{ form.name }}</div>
+                    <span class="span_phone" style="margin-left: 20%">Контактный телефон</span>
+                    <div class="input_phone">{{ form.phone }}</div>
+                </form>
+                <div class="input_name"><button class="btn-warning buton_popup" form="form_popup">Отправить</button></div>
+            </div>
+        </div>
+        <div class="bg_popup" style=""></div>
 
 
 <script src="{% static "js/script.js" %}"></script>

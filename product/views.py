@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate, Air, Contact
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from .forms import PopupForm
+from .forms import FormPopup
 
 from django.views.generic import *
 
@@ -12,11 +12,7 @@ def base(request):
     queryset_product2 = Product.objects.all()[4:8]
     queryset_product3 = Product.objects.all()[8:12]
     return render(request, "product/home.html",
-                  context={
-                                "product1": queryset_product1,
-                                "product2": queryset_product2,
-                                "product3": queryset_product3
-                            })
+                  context={"product1" : queryset_product1, "product2" : queryset_product2,"product3" : queryset_product3, })
 
 class LandingDetailViewcarousel(DetailView):
     model = Product
@@ -29,45 +25,21 @@ class LandingDetailViewcarousel(DetailView):
         filter = Product.objects.filter(product_name__icontains="букет")
         filter_get = filter.get(product_name__icontains="КИВИАН")
         size = SizeProd.objects.filter(slug__iexact="size")
-
-
         context = super(LandingDetailViewcarousel, self).get_context_data(**kwargs)
-
         context["product_companion"] = queryset_compabion
         context["products"] = products
         context["one"] = one
-
         context["filter"] = filter
         context["filter_get"] = filter_get
         context["size"] = size
-
-
-
         return context
 
-def action(request):
-    post = request.POST
-    name = post["name_input"] # Считали значение с NAME  у инпута
-
-    # ЗАПИСЬ В БД
-    # Проверяем есть ли такая переменная через гет, если ессть ничего не делаем
-    # try:
-    #     obj = Recording.objects.get(rec=name)
-    # except Recording.DoesNotExist: # тначе записум в базу и сохраняем
-    #     obj = Recording(rec=name)
-    #     obj.save()
-
-    obj, created = Recording.objects.get_or_create(rec=name)
-    obj.save()
-
-
-
-    return render(request, "product/action.html", context={"post": post,"name": name})
 
 
 class ListViewBuket(ListView):
     model = Buket
     template_name = "product/buket_list.html"
+
 
     def get_context_data(self, **kwargs):
         buket = Buket.objects.all()
@@ -159,7 +131,7 @@ class ListViewBasket(ListView):
         context = super(ListViewBasket, self).get_context_data(**kwargs)
 
 
-        context["buket"] = basket
+        context["basket"] = basket
         context["page"] = page
         context["is_paginated"] = is_paginated
         context["prev_url"] = prev_url
@@ -553,38 +525,32 @@ class DetailViewAir(DetailView):
         return context
 
 def contact(request):
-    return render(request, "product/contact.html", context={})
+    return render(request,"product/contact.html")
 
 
-def contactPopup(request):
-    if request.method == 'POST':
-        form = PopupForm(request.POST)
-        if form.is_valid():
-            # cont = form.save(commit=False)
-            # cont.name = form.data['name']
-            # cont.phone = form.data['phone']
-            # cont.save()
-            return redirect('/')
-    else:
-
-        form = PopupForm()
-
-    return render(request, "base.html", context={'form': form})
 
 
 class ListViewBasketBay(TemplateView):
     model = Buket
 
     def dispatch(self, request, *args, **kwargs):
-
-
         post = request.POST
         quantity = post["basket_add"]
-
         return render(request, "product/sale_basket.html", context={})
 
 
-
+def test(request):
+    if request.method == 'POST':
+        form = FormPopup(request.POST)
+        if form.is_valid():
+            form.save()
+            # name = form.cleaned_data.get("name")
+            # phone = form.cleaned_data.get("phone")
+            # Contact.objects.create(name=name, phone=phone)
+            #return redirect('/')
+    else:
+        form = FormPopup()
+    return redirect('/', locals())
 
 
 

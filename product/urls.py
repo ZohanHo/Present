@@ -8,7 +8,6 @@ urlpatterns = [
     path('basket/<pk>/',DetailViewBasket.as_view(),  name="basket_url"),
     path('chocolate/<pk>/',DetailViewChocolate.as_view(),  name="chocolate_url"),
     path('air/<pk>/',DetailViewAir.as_view(),  name="air_url"),
-    path('action/', action,  name="action"),
     path('buket/', ListViewBuket.as_view(),  name="buket"),
     path('basket/', ListViewBasket.as_view(),  name="basket"),
     path('chocolate/', ListViewChocolate.as_view(),  name="chocolate"),
@@ -28,7 +27,8 @@ urlpatterns = [
     path('delivery/', delivery,  name="delivery"),
     path('contact/', contact,  name="contact"),
     path('air/', ListViewAir.as_view(),  name="air"),
-    path('form_popup/', contactPopup, name="form_popup"),
-    path('test/', ListViewBasketBay.as_view(), name="test"),
+    path('ordering/', ListViewBasketBay.as_view(), name="ordering"),
+    path('test/', test, name="test"),
+
 
 ]

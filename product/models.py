@@ -169,7 +169,7 @@ class Air(models.Model):
         return reverse("air_url", kwargs={"pk": self.pk})
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100, blank=False)
     phone = models.CharField(max_length=100, blank=False)
 
     def __str__(self):
