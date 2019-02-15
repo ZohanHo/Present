@@ -154,7 +154,7 @@
 <!-- всплываюшее окно - popup дендинговой страницы  -->
         <div class="popup_fast" style="">
             <div class="form">
-                <form style="margin-top: 10px" id="form_popup" action="{% url 'test' %}" method="post">{% csrf_token %}
+                <form style="margin-top: 10px" id="form_popup" action="{% url 'form_popup_url' %}" method="post">{% csrf_token %}
                     <span class="span_name" style="">Ваше имя</span>
                     <div class="input_name">{{ form.name }}</div>
                     <span class="span_phone" style="margin-left: 20%">Контактный телефон</span>

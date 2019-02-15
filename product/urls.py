@@ -28,7 +28,7 @@ urlpatterns = [
     path('contact/', contact,  name="contact"),
     path('air/', ListViewAir.as_view(),  name="air"),
     path('ordering/', ListViewBasketBay.as_view(), name="ordering"),
-    path('test/', test, name="test"),
+    path('form_popup/', form_popup, name="form_popup_url"),
 
 
 ]

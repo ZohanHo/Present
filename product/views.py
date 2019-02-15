@@ -528,6 +528,14 @@ def contact(request):
     return render(request,"product/contact.html")
 
 
+def form_popup(request):
+    if request.method == 'POST':
+        form = FormPopup(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FormPopup()
+    return redirect('/', {"form":form})
 
 
 class ListViewBasketBay(TemplateView):
@@ -537,20 +545,3 @@ class ListViewBasketBay(TemplateView):
         post = request.POST
         quantity = post["basket_add"]
         return render(request, "product/sale_basket.html", context={})
-
-
-def test(request):
-    if request.method == 'POST':
-        form = FormPopup(request.POST)
-        if form.is_valid():
-            form.save()
-            # name = form.cleaned_data.get("name")
-            # phone = form.cleaned_data.get("phone")
-            # Contact.objects.create(name=name, phone=phone)
-            #return redirect('/')
-    else:
-        form = FormPopup()
-    return redirect('/', locals())
-
-
-
