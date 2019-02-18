@@ -2,5 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{d3, html5shiv, respond}" />
+    <file url="file://$PROJECT_DIR$/static/js/script.js" libraries="{HTTP Response Handler, jquery, jquery-3.3.1}" />
   </component>
 </project>

@@ -2,14 +2,12 @@
 {% load static %}
 
 
-
 {%  block detail_buket %}
-
 
     <div class="container" >
         <div class="row" style="">
             <div class="col-md-4 offset-2" style="padding: 0; background: #F3F3F3; text-align: center;">
-                <h4 style="margin: 20px">{{ object.product_name }}</h4>
+                <h4 id="prod_name" style="margin: 20px">{{ object.product_name }}</h4>
                 <img src="{{ object.image_product.url }}" alt="" style="width: 50%; border: solid 1px">
             </div>
              <div class="col-md-4 " style="padding: 0; background: #F3F3F3; color: #65696D; ">
@@ -37,144 +35,24 @@
                  <hr>
 
                 <!-- input добавить товат в корзину -->
-                <form id="basket_add" action="{% url "test" %}" method="Post">{% csrf_token %}</form>
+                <form id="basket_add"  action="{% url 'basket_product_url' %}">{% csrf_token %}</form>
                 <div class="quantity-block">
                     <button class="quantity-arrow-minus"> - </button>
-                        <input name="basket_add" style="width: 10%; text-align: center" class="quantity-num" type="number" value="1" maxlength="100" title="Количество" form="basket_add"/>
+                        <input  id="basket_add_input" name="basket_add_input" style="width: 10%; text-align: center" class="quantity-num" type="number" value="1" maxlength="100" title="Количество" form="basket_add"/>
                     <button class="quantity-arrow-plus"> + </button>
-                <button style="color: white; border-radius: 5px;" class="btn btn-warning btn-bay" form="basket_add" type="submit">В КОРЗИНУ</button>
+                <button id="submit_button" style="color: white; border-radius: 5px;" class="btn btn-warning btn-bay" form="basket_add" type="submit"
+                        data-id="{{ object.id }}"
+                        data-name="{{ object.product_name }}"
+                        data-price="{{ object.price }}"
+                        data-session_key="{{ session_key }}"
+                        data-images="{{ object.image_product.url }}"
+                    >В КОРЗИНУ
+                </button>
                 </div>
 
             </div>
         </div>
     </div>
-
-
-    
-<!-- цена в деталке по количеству килограм -->
-    <script>
-    //Basket
-
-    $(document).ready(function () {    //скрипт загрузится после того как загрузится вся страница html
-        var form = $('#basket_add');   //выбираем используя селектор ID формы
-        connsole.log(form)
-    });
-
-
-    //EndBasket
-    </script>
-
-
-
-    <script>
-
-        var checkbox1 = $('#s');
-        var checkbox2 = $('#m');
-        var checkbox3 = $('#l');
-
-        var price_smoll = 2250..toFixed(2); // .toFixed(2) - 2 знака после запятой
-        var price_medium = 2500..toFixed(2); // .toFixed(2) - 2 знака после запятой
-        var price_lagre = 2750..toFixed(2); // .toFixed(2) - 2 знака после запятой
-
-        var price_smoll_dop = 2330..toFixed(2); // .toFixed(2) - 2 знака после запятой
-        var price_medium_dop = 2580..toFixed(2); // .toFixed(2) - 2 знака после запятой
-        var price_lagre_dop = 2830..toFixed(2); // .toFixed(2) - 2 знака после запятой
-
-        var span1 = document.getElementById('price_span1');
-        var span2 = document.getElementById('price_span2');
-
-        function smoll() {
-            if (checkbox1) {
-                span1.innerHTML = price_smoll;
-                span2.innerHTML = price_smoll;
-
-            }
-        }
-
-        function medium() {
-            if (checkbox2) {
-                span1.innerHTML = price_medium;
-                span2.innerHTML = price_medium;
-            }
-        }
-
-        function lagre() {
-            if (checkbox3) {
-                span1.innerHTML = price_lagre;
-                span2.innerHTML = price_lagre;
-            }
-        }
-
-
-
-         <!-- значение с select-options -->
-        var select = document.getElementById('dop_chocolate');
-
-
-            select.addEventListener('change', function() {
-
-
-                var i = this.selectedIndex; //по индексу можем выбрать options нужный от 0 и дальше по порядку
-                if (checkbox1)
-                if (i == 1) {
-                    //var value = this.options[i].value; // так можно считать значение с value у options
-                    if (checkbox1) {
-                        span1.innerHTML = price_smoll_dop;
-                    }
-                    if (checkbox2)  {
-                        span1.innerHTML = price_medium_dop;
-                    }
-                    if (checkbox3)  {
-                        span1.innerHTML = price_lagre_dop;
-                    }
-
-                }
-
-                if (i == 0) {
-
-                    if (checkbox1)  {
-                        span1.innerHTML = price_smoll;
-                    }
-                    if (checkbox2)  {
-                        span1.innerHTML = price_medium;
-                    }
-                    if (checkbox3)  {
-                        span1.innerHTML = price_lagre;
-                    }
-                }
-            });
-
-
-    </script>
-
-
-
-    <script>
-        // <!-- input количества товара -->
-            $(function() {(function quantityProducts() {
-            var $quantityArrowMinus = $(".quantity-arrow-minus");
-            var $quantityArrowPlus = $(".quantity-arrow-plus");
-            var $quantityNum = $(".quantity-num");
-
-            $quantityArrowMinus.click(quantityMinus);
-            $quantityArrowPlus.click(quantityPlus);
-
-            function quantityMinus() {
-              if ($quantityNum.val() > 1) {
-                $quantityNum.val(+$quantityNum.val() - 1);
-              }
-            }
-
-            function quantityPlus() {
-              $quantityNum.val(+$quantityNum.val() + 1);
-            }
-            })
-            ();
-
-            });
-    </script>
-
-
 
 
     <div class="container">
@@ -231,20 +109,7 @@
                 </div>
             </div>
         </div>
-
-{##}
-{#    <div class="container">#}
-{#        <div class="row">#}
-{#            <div class="col-md-8 offset-2" style="background: #F3F3F3; color: #65696D;">#}
-{#                <a href="#">Добавить коментарий</a>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-
-
-
-
-</div>
+    </div>
 
 
 

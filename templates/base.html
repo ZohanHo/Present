@@ -9,11 +9,13 @@
 
 
 
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,36 +53,36 @@
             <img src="{% static 'images/under-construction.png' %}" alt="Сайт в разработке">
         </div>
 
-<div class="container">
-    <div class="row">
-        <div style="padding-top: 10px; padding-bottom: 10px;"  class="col-md-2 offset-2">
-            <span >
-                <a style="padding-top: 5px" href="{% url "base" %}"><img class="img-fluid logo" src="{% static "media/images/banana.png" %}" alt="logo"></a>
-            </span></div>
-        <div style="padding-top: 60px;padding-bottom: 10px;padding-left: 0;padding-right: 0"  class="col-md-3">
-            <span>
-               <ul class="hr menu">
-                   <li><a style="font-size: small; color: darkorange" href="{% url "pay" %}">Как оплатить</a></li>
-                   <li><a style="font-size: small; color: darkorange" href="{% url "delivery" %}">Доставка</a></li>
-                   <li><a style="font-size: small; color: darkorange" href="{% url "kids" %}">Акции</a></li>
-                   <li><a style="font-size: small; color: darkorange" href="{% url "contact" %}">Контакты</a></li>
-                </ul>
-                <ul class="hr menu">
-                   <li><a style="font-size: small; color: darkorange" href="">> UA</a></li>
-                   <li><a style="font-size: small; color: darkorange" href="">> RU</a></li>
-                </ul>
-            </span></div>
-        <div style=""  class="col-md-3">
-            <span>
-                <div style="padding-top: 30px;padding-bottom: 20px;padding-left: 30px" >
-                    <button style="text-align: center; color: white; font-weight: 200; font-family: sans-serif;font-size: small; margin-bottom: 10px; border-radius: 2px 10px 2px ; padding: 2px 10px 2px" class="btn-warning open_fast" form="">Оставьте номер. Мы перезвоним</button>
-                    <p style="font-family: Calibri; font-size: small; text-align: left">ЗАКАЗЫВАЙТЕ ПО ТЕЛЕФОНУ В КИЕВЕ</p>
-                    <p style="font-family: Calibri; font-size: large; color: #342F2F; text-align: center">+38(066)55-44-333 (Viber)</p>
-                </div>
-            </span>
+    <div class="container">
+        <div class="row">
+            <div style="padding-top: 10px; padding-bottom: 10px;"  class="col-md-2 offset-2">
+                <span >
+                    <a style="padding-top: 5px" href="{% url "base" %}"><img class="img-fluid logo" src="{% static "media/images/banana.png" %}" alt="logo"></a>
+                </span></div>
+            <div style="padding-top: 60px;padding-bottom: 10px;padding-left: 0;padding-right: 0"  class="col-md-3">
+                <span>
+                   <ul class="hr menu">
+                       <li><a style="font-size: small; color: darkorange" href="{% url "pay" %}">Как оплатить</a></li>
+                       <li><a style="font-size: small; color: darkorange" href="{% url "delivery" %}">Доставка</a></li>
+                       <li><a style="font-size: small; color: darkorange" href="{% url "kids" %}">Акции</a></li>
+                       <li><a style="font-size: small; color: darkorange" href="{% url "contact" %}">Контакты</a></li>
+                    </ul>
+                    <ul class="hr menu">
+                       <li><a style="font-size: small; color: darkorange" href="">> UA</a></li>
+                       <li><a style="font-size: small; color: darkorange" href="">> RU</a></li>
+                    </ul>
+                </span></div>
+            <div style=""  class="col-md-3">
+                <span>
+                    <div style="padding-top: 30px;padding-bottom: 20px;padding-left: 30px" >
+                        <button style="text-align: center; color: white; font-weight: 200; font-family: sans-serif;font-size: small; margin-bottom: 10px; border-radius: 2px 10px 2px ; padding: 2px 10px 2px" class="btn-warning open_fast" form="">Оставьте номер. Мы перезвоним</button>
+                        <p style="font-family: Calibri; font-size: small; text-align: left">ЗАКАЗЫВАЙТЕ ПО ТЕЛЕФОНУ В КИЕВЕ</p>
+                        <p style="font-family: Calibri; font-size: large; color: #342F2F; text-align: center">+38(066)55-44-333 (Viber)</p>
+                    </div>
+                </span>
+            </div>
         </div>
     </div>
-</div>
 
 
 
@@ -96,26 +98,40 @@
                        <li><a href="{% url "chocolate" %}">ФРУКТЫ В ШОКОЛАДЕ</a></li>
                        <li><a href="">АКЦИИ</a></li>
                        <li><a href="">14 ФЕВРАЛЯ</a></li>
-                       <li style="border: solid orange 1px"><a href="">Корзина пуста</a></li>
+                       <li class="basket_top" style="border: solid orange 1px; padding: 5px"><a style="" href="{% url "basket_product_url" %}">Корзина</a></li>
                     </ul>
                 </span>
+                <!-- div в котором будет отображатся количество товаров в корзине -->
+                <div class="basket_item d-none" style="z-index: 1;  position: absolute; top: 108%; left: 63.5%; opacity: .9; color: white; font-size: small; background-color: #332F2F; width: 280px" >
+                    <ul style="margin: 6px 8px; font-size: 10px">
+                        {% for foo in sesiion_in_basket %}
+                        <li style="list-style-type: none; font-size: small"><span>{{ foo.product_name }}</span> - <span style="">{{ foo.product_nmb }}</span>шт</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="basket_item_num"
+                     style="position: absolute; top: 27%;left: 91.5%; color: red; font-size: medium; width: 50px" >
+                    {{ count }}
+                </div>
+
             </div>
         </div>
     </div>
 
-{% block menu %}{% endblock %}
-{% block carusel %}{% endblock %}
-{% block content %}{% endblock %}
-{% block detail_carousel %}{% endblock %}
-{% block buket %}{% endblock %}
-{% block detail_buket %}{% endblock %}
-{% block chocolate %}{% endblock %}
-{% block detail_chocolat %}{% endblock %}
-{% block air %}{% endblock %}
-{%  block detail_air %}{% endblock %}
-{% block form_submit %}{% endblock %}
 
-<script src="{% static "js/script.js" %}"></script>
+    {% block menu %}{% endblock %}
+    {% block carusel %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block detail_carousel %}{% endblock %}
+    {% block buket %}{% endblock %}
+    {% block detail_buket %}{% endblock %}
+    {% block chocolate %}{% endblock %}
+    {% block detail_chocolat %}{% endblock %}
+    {% block air %}{% endblock %}
+    {%  block detail_air %}{% endblock %}
+    {% block form_submit %}{% endblock %}
+
+
 
 
     <!-- footer -->
@@ -127,8 +143,9 @@
             </div>
         </div>
     </div>
-
-    <div style="background: #4D4443">
+        <!-- footer -->
+    <div id="footer" style="background: #4D4443;
+  /*Высота футера*/">
         <div class="container">
             <div class="row">
                 <div style="" class="col-md-3 offset-2">
@@ -151,7 +168,7 @@
         </div>
     </div>
 
-<!-- всплываюшее окно - popup дендинговой страницы  -->
+    <!-- всплываюшее окно - popup дендинговой страницы  -->
         <div class="popup_fast" style="">
             <div class="form">
                 <form style="margin-top: 10px" id="form_popup" action="{% url 'form_popup_url' %}" method="post">{% csrf_token %}
@@ -166,7 +183,9 @@
         <div class="bg_popup" style=""></div>
 
 
-<script src="{% static "js/script.js" %}"></script>
+
+    <script type="text/javascript" src="{% static "js/script.js" %} "></script>
+
 
     </body>
 </html>

@@ -3,12 +3,55 @@
 
 {% block form_submit %}
 
-    <div class="container">
+    <div  class="container" >
         <div class="row">
-            <div  class="col-md-8 offset-2">
-                <h3>Товары в корзине</h3>
-            </div>
-        </div>
-    </div>
 
+            {% if count %}  <!-- count прописан в контекстном процесоре -->
+                <div style="" class="col-md-8 offset-2">
+                    <p></p>
+                    <span style="font-size: small; margin-left: 4px; color: grey; font-weight:bold;">Изображение</span>
+                    <span style="font-size: small; margin-left: 90px; color: grey; font-weight:bold;">Название</span>
+                    <span style="font-size: small; margin-left: 147px; color: grey; font-weight:bold;">Цена</span>
+                    <span style="font-size: small; margin-left: 70px; color: grey; font-weight:bold;">Количество</span>
+                    <span style="font-size: small; margin-left: 30px; color: grey; font-weight:bold;">Полная сумма</span>
+                    <hr style="background-color: grey; font-weight: bold">
+                </div>
+            {% else %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-2">
+                            <h3>Ваша корзина пуста</h3>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% for foo in sesiion_in_basket %}
+                <div class="col-md-8 offset-2">
+
+                    <div style="">
+                        <img src="{{ foo.image_product.url }}" alt="" style="width: 15%;">
+                        <span style="position: absolute; left: 140px; top: 50px; font-size: small; color: #65696D; font-weight: 600">{{ foo.product_name }}</span>
+                        <span style="position: absolute; left: 410px; top: 50px; font-size: small; color: brown; font-weight:bold;">2050 UAH</span>
+                        <span style="position: absolute; left: 550px; top: 50px; font-size: small; color: #65696D; font-weight:bold;">{{ foo.product_nmb }} шт</span>
+                        <span style="position: absolute; left: 660px; top: 50px; font-size: small; color: brown; font-weight:bold;">3050 UAH</span>
+                    </div>
+                    <hr style="background-color: grey; font-weight: bold">
+
+                </div>
+            {% endfor %}
+            {% if count %}
+            <div style="" class="col-md-12 offset-7">
+                <br>
+                <p style=" margin-left: 10px; font-size: 16px; color: #65696D; font-weight: 600">Итого к оплате <span style="margin-left: 30px; color: brown; font-weight :bold; font-size: 16px">6700 uah</span></p>
+            </div>
+
+            <div style="" class="col-md-12 offset-9">
+                <button class="btn btn-warning">Оформить заказ</button>
+            </div>
+            {% endif %}
+
+    </div>
+        </div>
+    <br>
 {% endblock %}

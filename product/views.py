@@ -1,11 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate, Air, Contact
+from order.models import ProductInBasket, Status
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from .forms import FormPopup
-
 from django.views.generic import *
-
+from django.http import JsonResponse
 
 def base(request):
     queryset_product1 = Product.objects.all()[:4]
@@ -98,7 +98,18 @@ class DetailViewBuket(DetailView):
     model = Buket
     template_name = "product/card_detail_buket.html"
 
+
     def get_context_data(self, **kwargs):
+
+        #session_key
+        # session_key = self.request.session.get('session_key')
+        # print(session_key)
+        # if not session_key:
+        #     self.request.session.cycle_key()
+        #     print(session_key)
+            # print(self.request.session.session_key)
+
+
         buket = Buket.objects.all()
         compabion = ProductCompanion.objects.all()
         context = super(DetailViewBuket, self).get_context_data(**kwargs)
@@ -538,10 +549,31 @@ def form_popup(request):
     return redirect('/', {"form":form})
 
 
-class ListViewBasketBay(TemplateView):
-    model = Buket
+def basket_product(request):
+    dict_json = dict()
 
-    def dispatch(self, request, *args, **kwargs):
-        post = request.POST
-        quantity = post["basket_add"]
-        return render(request, "product/sale_basket.html", context={})
+    session = request.session.session_key
+
+    product_id = request.POST.get('id')
+    product_nmb = request.POST.get('nmb')
+    product_price = request.POST.get('price')
+    product_name = request.POST.get('name')
+    session_key = request.POST.get('session_key')
+    images = request.POST.get('images')
+
+    if session == session_key:
+        obj, created = ProductInBasket.objects.get_or_create(product_name = product_name,
+                                        product_nmb = product_nmb,
+                                        image_product= images,
+                                        session_key = session_key,
+                                       ) # price_per_item = product_price
+        if not created:
+            obj.update(product_name = product_name,
+                                            product_nmb = product_nmb,
+                                            image_product= images,
+                                            session_key = session_key,)
+            obj.save(force_update=True)
+
+
+    return render(request, "product/sale_basket.html", context={})
+
