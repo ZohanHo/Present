@@ -31,7 +31,7 @@ class Product(models.Model):
 class Buket(models.Model):
 
     product_name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price = models.IntegerField(default=0, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)

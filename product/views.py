@@ -554,25 +554,31 @@ def basket_product(request):
 
     session = request.session.session_key
 
-    product_id = request.POST.get('id')
-    product_nmb = request.POST.get('nmb')
-    product_price = request.POST.get('price')
-    product_name = request.POST.get('name')
-    session_key = request.POST.get('session_key')
+    id = request.POST.get('id')
+    nmb = request.POST.get('nmb')
+    price = request.POST.get('price')
+    name = request.POST.get('name')
+    key = request.POST.get('session_key')
     images = request.POST.get('images')
 
-    if session == session_key:
-        obj, created = ProductInBasket.objects.get_or_create(product_name = product_name,
-                                        product_nmb = product_nmb,
+
+
+    if session == key:
+
+        try:
+            product = ProductInBasket.objects.get(product_name = name)
+            if product:
+                product.product_nmb = nmb
+                product.save()
+        except:
+            ProductInBasket.objects.create(
+                                        product_name = name,
+                                        product_nmb = nmb,
                                         image_product= images,
-                                        session_key = session_key,
-                                       ) # price_per_item = product_price
-        if not created:
-            obj.update(product_name = product_name,
-                                            product_nmb = product_nmb,
-                                            image_product= images,
-                                            session_key = session_key,)
-            obj.save(force_update=True)
+                                        session_key = key,
+                                        price_per_item = price,
+                                        )
+
 
 
     return render(request, "product/sale_basket.html", context={})

@@ -36,10 +36,11 @@ class ProductInBasket(models.Model):
         verbose_name = "Товар в корзине"
         verbose_name_plural = "Товары в корзине"
 
-    # Переопределяем метод save для модели который дубет созранять в админке поля с сумой заказа и общей сумой по всем заказам
-    # def save(self, *args, **kwargs):
-    #     self.total_price = self.price_per_item * self.product_nmb  # общая цена равна (цена товара умножено на количество)
-    #     super( ProductInBasket, self).save(*args, **kwargs)
+    #Переопределяем метод save для модели который дубет созранять в админке поля с сумой заказа и общей сумой по всем заказам
+    def save(self, *args, **kwargs):
+        # общая цена равна (цена товара умножено на количество), потом супер что бы работало по плану
+        self.total_price = int(self.product_nmb) * int(self.price_per_item)
+        super(ProductInBasket, self).save(*args, **kwargs)
 
 
 

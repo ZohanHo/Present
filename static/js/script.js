@@ -50,7 +50,7 @@ $('.open_fast').click(function () { // Описуем что будет прои
         //ложим нужные переменные в наш словарь data
         data["nmb"] = nmb;
         data["name"] = name;
-        data["price"] = price;
+        data["price"] = parseFloat(price);
         data["csrfmiddlewaretoken"] = csrftoken;
         data["id"] = id;
         data["session_key"] = session_key;
