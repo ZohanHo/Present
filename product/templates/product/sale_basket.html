@@ -20,7 +20,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 offset-2">
-                            <h3>Ваша корзина пуста</h3>
+                            <br>
+                            <h3 style="font-weight: bold; color: firebrick">Ваша корзина пуста</h3>
+                            <img style="width: 90%" src="{% static "media/images/no.png" %}" alt="">
                         </div>
                     </div>
                 </div>
@@ -33,7 +35,16 @@
                         <img src="{{ foo.image_product.url }}" alt="" style="width: 15%;">
                         <span style="position: absolute; left: 130px; top: 50px; font-size: small; color: #65696D; font-weight: 600">{{ foo.product_name }}</span>
                         <span style="position: absolute; left: 430px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.price_per_item }} UAH</span>
-                        <span style="position: absolute; left: 565px; top: 50px; font-size: small; color: #65696D; font-weight:bold;">{{ foo.product_nmb }} шт</span>
+                        <span style="position: absolute; left: 540px; top: 40px; font-size: small; color: #65696D; font-weight:bold;">
+                            <div class="quantity-block">
+                                <button class="quantity-arrow-minus"> - </button>
+                                    <input style="width: 14%; text-align: center" class="quantity-num" type="number" value="{{ foo.product_nmb }}" maxlength="100" title="quantity-num"/>
+                                <button class="quantity-arrow-plus"> + </button>
+                            </div>
+                        </span>
+                        <span style="position: absolute; left: 740px; top: 50px; font-size: small; color: #65696D; font-weight:bold;"><a
+                                href="{{ foo.get_absolute_url_buket_del }}"><img src="{% static "images/delete2.png " %}" alt=""></a></span>
+
                         <span style="position: absolute; left: 640px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.total_price }} UAH</span>
                     </div>
                     <hr style="background-color: grey; font-weight: bold">
@@ -41,12 +52,12 @@
                 </div>
             {% endfor %}
             {% if count %}
-            <div style="" class="col-md-12 offset-7">
+            <div style="" class="col-md-8 offset-7">
                 <br>
-                <p style=" margin-left: 10px; font-size: 16px; color: #65696D; font-weight: 600">Итого к оплате <span style="margin-left: 30px; color: brown; font-weight :bold; font-size: 16px">6700 uah</span></p>
+                <p style=" margin-left: 1px; font-size: 16px; color: #65696D; font-weight: 600">Итого к оплате <span style="margin-left: 30px; color: brown; font-weight :bold; font-size: 16px">{{ all_total_price }},00 UAH</span></p>
             </div>
 
-            <div style="" class="col-md-12 offset-8">
+            <div style="" class="col-md-8 offset-8">
                 <button style="margin-left: 74px" class="btn btn-warning">Оформить заказ</button>
             </div>
             {% endif %}
@@ -54,4 +65,7 @@
     </div>
         </div>
     <br>
+
+
 {% endblock %}
+

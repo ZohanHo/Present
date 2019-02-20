@@ -7,9 +7,6 @@
     <title>Магазин подарков - Banana</title>
 
 
-
-
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -47,11 +44,12 @@
 
 </head>
 <body>
+<div class="wrapper">
+<div class="content">
 
-
-        <div style="position: absolute; top: 10%; left: 5%">
-            <img src="{% static 'images/under-construction.png' %}" alt="Сайт в разработке">
-        </div>
+    <div style="position: absolute; top: 10%; left: 5%">
+        <img src="{% static 'images/under-construction.png' %}" alt="Сайт в разработке">
+    </div>
 
     <div class="container">
         <div class="row">
@@ -86,7 +84,7 @@
 
 
 
-    <!-- меню -->
+    <!-- Top menu -->
      <div class="container">
         <div class="row">
             <div  style="border: solid; background-color: #342F2F; margin-top: 5px; padding-bottom: 5px; padding-top: 10px" class="col-md-8 offset-2">
@@ -98,16 +96,20 @@
                        <li><a href="{% url "chocolate" %}">ФРУКТЫ В ШОКОЛАДЕ</a></li>
                        <li><a href="">АКЦИИ</a></li>
                        <li><a href="">14 ФЕВРАЛЯ</a></li>
-                       <li class="basket_top" style="border: solid orange 1px; padding: 5px"><a style="" href="{% url "basket_product_url" %}">Корзина</a></li>
+                       <li class="basket_top" style="border: solid orange 1px; border-radius: 30px 15px; padding: 5px"><a style="" href="{% url "basket_product_url" %}">Корзина</a></li>
                     </ul>
                 </span>
                 <!-- div в котором будет отображатся количество товаров в корзине -->
-                <div class="basket_item d-none" style="z-index: 1;  position: absolute; top: 108%; left: 63.5%; opacity: .9; color: white; font-size: small; background-color: #332F2F; width: 280px" >
-                    <ul style="margin: 6px 8px; font-size: 10px">
+                <div class="basket_item d-none" style="border-radius: 20px; z-index: 1;  position: absolute; top: 108%; left: 56%; opacity: .9; color: white; font-size: small; background-color: #332F2F; width: 340px" >
+                    <ul style="margin: 10px 20px; font-size: 10px; ">
                         {% for foo in sesiion_in_basket %}
-                        <li style="list-style-type: none; font-size: small"><span>{{ foo.product_name }}</span> - <span style="">{{ foo.product_nmb }}</span>шт</li>
+                        <li style="list-style-type: none; font-size: small; "><span>{{ foo.product_name }}</span> - <span style="">{{ foo.product_nmb }}</span>шт</li>
                         {% endfor %}
                     </ul>
+                    {% if sesiion_in_basket %}
+                    <hr style="background-color: black">
+                    <p style="color: orange; margin-left: 30px">Общая сумма заказа: {{ all_total_price }} UAH</p>
+                    {% endif %}
                 </div>
                 <div id="basket_item_num"
                      style="position: absolute; top: 27%;left: 91.5%; color: red; font-size: medium; width: 50px" >
@@ -132,41 +134,50 @@
     {% block form_submit %}{% endblock %}
 
 
+</div> <!-- end content for content-->
 
+<!-- footer -->
+<div class="footer">
 
-    <!-- footer -->
-    <div class="" style="background-color: #4D4443;">
-        <div class="" style="">
-            <div style="padding: 0; background-color: #4D4443;" class="col-md-8 offset-2">
-                <p style="padding-left: 15px; color: #AFA6A5; margin-left: 15%; margin-right: 15%; margin-top: 4%; margin-bottom: 4%;  border: dotted lightgray; text-align: left; font-size: small">
-                    Фруктовый букет в Киеве от FRUTADO — вкусный необычный подарок на любой праздник </p>
-            </div>
-        </div>
-    </div>
-        <!-- footer -->
-    <div id="footer" style="background: #4D4443;
-  /*Высота футера*/">
-        <div class="container">
-            <div class="row">
-                <div style="" class="col-md-3 offset-2">
+    <div class="container" style="">
+        <div class="row" style="">
+            <div class="" style="background-color: #4D4443; width: 760px; height: 200px; margin-left: 100px; position: relative"  >
+
+                <div style="" class="">
+                    <p style="padding: 8px 10px 8px;  color: orange; margin-left: 50px; margin-right: 50px; margin-top: 2%; margin-bottom: 3%;  border: dotted lightgray; text-align: center; font-size: small">
+                        Фруктовый букет в Киеве от FRUTADO — вкусный необычный подарок на любой праздник </p>
+                </div>
+
+                <div style="position: absolute; left: 60px; top: 100px">
                     <span>
                         <br>
-                        <a href=""><img style="width: 25%" class=""
+                        <a href=""><img style="" class=""
                                         src="{% static "media/images/bank/mastercard.png" %}"
                                         alt="logo"></a>
-                        <a href=""><img style="width: 25%" class=""
+                        <a href=""><img style="" class=""
                                         src="{% static "media/images/bank/visa.png" %}" alt="logo"></a>
                     </span>
                 </div>
-                <div style="font-size: 10px; margin-bottom: 20px; color: #AFA6A5;" class="col-md-3 offset-2">
-                    <p style="margin: 0">Звоните +38(095)79-47-621 </p>
-                    <p style="margin: 0">Звоните +38(096)26-11-770 (VIBER)</p>
-                    <p style="margin: 0">ежедневно с 9.00-21.00 </p><br>
-                    <p style="margin: 0">Frutado © 2013-2017. Все права защищены</p>
+
+
+                <div style="position: absolute; left: 450px; top: 80px" class="">
+                    <p style="font-size: small">Звоните +38(066)55-44-333</p>
+                    <p style="font-size: small">Звоните +38(099)88-77-666 (VIBER)</p>
+                    <p style="font-size: small">ежедневно с 9.00-20.00</p>
+
+                    <p style="font-size: small">Banana © 2013-2017. Все права защищены</p>
                 </div>
+
             </div>
         </div>
     </div>
+
+</div> <!-- end footer for footer-->
+
+
+
+
+
 
     <!-- всплываюшее окно - popup дендинговой страницы  -->
         <div class="popup_fast" style="">
@@ -186,6 +197,11 @@
 
     <script type="text/javascript" src="{% static "js/script.js" %} "></script>
 
-
-    </body>
+</div> <!-- end wraper for footer-->
+</body>
 </html>
+
+<style>
+
+
+</style>

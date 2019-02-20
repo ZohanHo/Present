@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, reverse
 from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate, Air, Contact
 from order.models import ProductInBasket, Status
 from django.core.paginator import Paginator
@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from .forms import FormPopup
 from django.views.generic import *
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 
 def base(request):
     queryset_product1 = Product.objects.all()[:4]
@@ -564,22 +565,62 @@ def basket_product(request):
 
 
     if session == key:
+        # Данная конструкция обновляе количество в базе, в нам нужно добавлять
+        # try:
+        #     product = ProductInBasket.objects.get(product_name = name)
+        #     if product:
+        #         product.product_nmb = nmb
+        #         product.save()
+        # except:
+        #     ProductInBasket.objects.create(
+        #                                 product_name = name,
+        #                                 product_nmb = nmb,
+        #                                 image_product= images,
+        #                                 session_key = key,
+        #                                 price_per_item = price,
+        #                                 )
 
-        try:
-            product = ProductInBasket.objects.get(product_name = name)
-            if product:
-                product.product_nmb = nmb
-                product.save()
-        except:
-            ProductInBasket.objects.create(
+        new_product, created = ProductInBasket.objects.get_or_create(
+                                        # Get ищит совпадения по етим полям
                                         product_name = name,
-                                        product_nmb = nmb,
                                         image_product= images,
                                         session_key = key,
-                                        price_per_item = price,
+                                        # Тут то что попадает под create
+                                        defaults={"product_nmb": nmb, "price_per_item" : price}
                                         )
+        if not created:
+            new_product.product_nmb += int(nmb)
+            new_product.save(force_update=True)
+
+
+    # Обшщий прайс по всем позициям, выыдираем из кверисета цену по всем позициям и сумируем, можно сделать на можели post_save для друугой модели
+    # all_total_price = 0
+    # all_price = ProductInBasket.objects.all()
+    # for foo in all_price:
+    #     one_total_price = foo.total_price
+    #     all_total_price += int(one_total_price)
 
 
 
+    return render(request, "product/sale_basket.html", context={}) #"all_total_price": all_total_price
+
+
+
+
+
+"""
+Представление, которое отображает страницу подтверждения и удаляет существующий объект.
+ Данный объект будет удален только если используется метод запроса POST. 
+ Если это представление получено через GET, оно отобразит страницу подтверждения, 
+ которая должна содержать форму, которая отправляет по тому же URL-адресу.
+"""
+# class BuketDeleteView(DeleteView):
+#     model = ProductInBasket
+#     success_url = reverse_lazy('basket_product_url')
+#     template_name = "product/test.html"
+
+
+def BuketDeleteView(request, pk):
+    obj = ProductInBasket.objects.get(pk=pk)
+    obj.delete()
     return render(request, "product/sale_basket.html", context={})
-

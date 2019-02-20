@@ -35,10 +35,10 @@
                  <hr>
 
                 <!-- input добавить товат в корзину -->
-                <form id="basket_add"  action="{% url 'basket_product_url' %}">{% csrf_token %}</form>
+                <form id="basket_add" class="basket_add" action="{% url 'basket_product_url' %}">{% csrf_token %}</form>
                 <div class="quantity-block">
                     <button class="quantity-arrow-minus"> - </button>
-                        <input  id="basket_add_input" name="basket_add_input" style="width: 10%; text-align: center" class="quantity-num" type="number" value="1" maxlength="100" title="Количество" form="basket_add"/>
+                        <input id="basket_add_input" class="quantity-num basket_add_input" name="basket_add_input" style="width: 10%; text-align: center" type="number" value="1" maxlength="100" title="Количество" form="basket_add"/>
                     <button class="quantity-arrow-plus"> + </button>
                 <button id="submit_button" style="color: white; border-radius: 5px;" class="btn btn-warning btn-bay" form="basket_add" type="submit"
                         data-id="{{ object.id }}"

@@ -13,4 +13,10 @@ def popup(request):
     sesiion_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)  # кверисет
     count = sesiion_in_basket.count()  # количество обьектов в кверисете
 
+    all_total_price = 0
+    all_price = ProductInBasket.objects.all()
+    for foo in all_price:
+        one_total_price = foo.total_price
+        all_total_price += int(one_total_price)
+
     return locals()

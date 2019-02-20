@@ -23,12 +23,12 @@ $('.open_fast').click(function () { // Описуем что будет прои
 
     //Basket
     $(document).ready(function () {    //скрипт загрузится после того как загрузится вся страница DOM
-        var form_basket = $('#basket_add');   //выбираем форму используя селектор ID формы
+        var form_basket = $('.basket_add');   //выбираем форму используя селектор ID формы
         form_basket.on('submit', function () {  // on('submit', function - используетсяя при сабмите формы
             //С помощью функции event.preventDefault(); - можно сделать что бы страница не обновлялась при отправке
             // формы(предотвращаеет стандартное поведение) передаем аргумент который может называтся как либо, тут event
            // event.preventDefault(); // применяеи фугкцию preventDefault()
-            var nmb = $('#basket_add_input').val(); // Считали значение с input (Количество)
+            var nmb = $('.basket_add_input').val(); // Считали значение с input (Количество)
 
             var submit_button = $('#submit_button'); // Взяли ворму по id
 

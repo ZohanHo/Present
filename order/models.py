@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.shortcuts import reverse
 
 class Status(models.Model):
 
@@ -35,6 +35,10 @@ class ProductInBasket(models.Model):
     class Meta:
         verbose_name = "Товар в корзине"
         verbose_name_plural = "Товары в корзине"
+
+    def get_absolute_url_buket_del(self):
+        return reverse("buket_del_url", kwargs={"pk": self.pk})
+
 
     #Переопределяем метод save для модели который дубет созранять в админке поля с сумой заказа и общей сумой по всем заказам
     def save(self, *args, **kwargs):
