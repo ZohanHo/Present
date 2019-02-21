@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 
-class Product(models.Model):
+class Product(models.Model): # Carusel
     product_name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -35,7 +35,7 @@ class Buket(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
-    image_product = models.ImageField(upload_to="static/images/", default="")
+    image_buket = models.ImageField(upload_to="static/images/", default="")
     sizeprod = models.ManyToManyField('SizeProd',blank=True,  related_name='buket')
     smoll_s = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     smoll_m = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -102,7 +102,7 @@ class Basket(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to="static/images/", default="")
+    image_basket = models.ImageField(upload_to="static/images/", default="")
     category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
 
     def __str__(self):
@@ -134,7 +134,7 @@ class Chocolate(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to="static/images/", default="")
+    image_chocolate = models.ImageField(upload_to="static/images/", default="")
     category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
 
     def __str__(self):
@@ -154,7 +154,7 @@ class Air(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to="static/images/", default="")
+    image_air = models.ImageField(upload_to="static/images/", default="")
     category = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=True)
 
     def __str__(self):

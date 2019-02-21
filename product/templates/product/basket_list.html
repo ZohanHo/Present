@@ -31,7 +31,7 @@
                 </div>
                      {% for foo in page %}
                         <div style="text-align: center; margin: 2.5px 2px 2.5px;  border: solid 1px grey;" class="col-md-3">
-                            <a href="{{ foo.get_absolute_url_basket }}"><img class="" src="{{ foo.image.url }}" alt="" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px"></a>
+                            <a href="{{ foo.get_absolute_url_basket }}"><img class="" src="{{ foo.image_basket.url }}" alt="" style="width: 100%; text-align: center; padding-top: 5px; padding-bottom: 5px"></a>
                             <div style="margin-top: 8px; height: 17px">
                                 <span style="">{{ foo.product_name }}</span>
                             </div>

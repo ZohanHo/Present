@@ -36,7 +36,7 @@ class ProductInBasket(models.Model):
         verbose_name = "Товар в корзине"
         verbose_name_plural = "Товары в корзине"
 
-    def get_absolute_url_buket_del(self):
+    def get_absolute_url_basket_del(self):
         return reverse("buket_del_url", kwargs={"pk": self.pk})
 
 
