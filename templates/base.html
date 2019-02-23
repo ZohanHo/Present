@@ -57,7 +57,7 @@
                 <span >
                     <a style="padding-top: 5px" href="{% url "base" %}"><img class="img-fluid logo" src="{% static "media/images/banana.png" %}" alt="logo"></a>
                 </span></div>
-            <div style="padding-top: 60px;padding-bottom: 10px;padding-left: 0;padding-right: 0"  class="col-md-3">
+            <div style="padding-top: 40px;padding-bottom: 10px;padding-left: 0;padding-right: 0"  class="col-md-3">
                 <span>
                    <ul class="hr menu">
                        <li><a style="font-size: small; color: darkorange" href="{% url "pay" %}">Как оплатить</a></li>
@@ -74,12 +74,15 @@
                 <span>
                     <div style="padding-top: 5px;padding-bottom: 20px; padding-left: 30px; text-align: right" >
 
+
                         <div style="margin-bottom: 7px">
-                            <span ><img style="width: 25px" src="{% static "media/images/user.png" %}" alt="">
-                                <a style="font-size: 14px; color: black; font-weight: bold" href="">
-                                    вход
-                                </a>
-                            </span>
+                            <img style="width: 25px" src="{% static "media/images/user.png" %}" alt="">
+                             {% if user.is_authenticated or request.user.is_staff  %}
+                                 <a style="font-size: small; color: black; font-weight: bold;" href="/admin">Пользователь: {{ user }} </a>
+                                <p><a style="font-size: small; color: black; font-weight: bold" href="/accounts/logout">Выход</a></p>
+                                {% else %}
+                                <a style="font-size: 14px; color: black; font-weight: bold" href="/accounts/login/">Вход</a>
+                            {% endif %}
                         </div>
 
 
@@ -174,8 +177,8 @@
 
 
                 <div style="position: absolute; left: 450px; top: 80px; color: white" class="">
-                    <p style="font-size: small">Звоните +38(066)55-44-333</p>
-                    <p style="font-size: small">Звоните +38(099)88-77-666 (VIBER)</p>
+                    <p style="font-size: small">Звоните +38 (066) 55-44-333</p>
+                    <p style="font-size: small">Звоните +38 (099) 88-77-666 (VIBER)</p>
                     <p style="font-size: small">ежедневно с 9.00-20.00</p>
 
                     <p style="font-size: small">Banana © 2013-2017. Все права защищены</p>
