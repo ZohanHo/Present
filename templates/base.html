@@ -74,14 +74,15 @@
                 <span>
                     <div style="padding-top: 5px;padding-bottom: 20px; padding-left: 30px; text-align: right" >
 
-
+                        <!-- Authenticated -->
                         <div style="margin-bottom: 7px">
                             <img style="width: 25px" src="{% static "media/images/user.png" %}" alt="">
                              {% if user.is_authenticated or request.user.is_staff  %}
                                  <a style="font-size: small; color: black; font-weight: bold;" href="/admin">Пользователь: {{ user }} </a>
                                 <p><a style="font-size: small; color: black; font-weight: bold" href="/accounts/logout">Выход</a></p>
                                 {% else %}
-                                <a style="font-size: 14px; color: black; font-weight: bold" href="/accounts/login/">Вход</a>
+                                <a style="font-size: 14px; color: black; font-weight: bold" href="/accounts/login/">Вход /</a>
+                                 <a style="font-size: 14px; color: black; font-weight: bold" href="/accounts/signup/">Регистрация</a>
                             {% endif %}
                         </div>
 
