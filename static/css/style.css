@@ -16,11 +16,12 @@ body {
 
 
 
-/* Таблица с елементами в строку */
+/* Таблица с елементами в строку - Главное меню */
 ul.hr {
 	text-align: start;
     margin: 0; /* Обнуляем значение отступов */
     padding: 0; /* Значение полей */
+
 }
 
 ul.hr li {
@@ -256,9 +257,6 @@ body {
 
 
 
-
-
-
 /* popup */
 .popup_fast {
     width: 280px;  /* ширина окна popup */
@@ -356,4 +354,10 @@ body {
 }
 .footer {
   flex: 0 0 auto;
+}
+
+
+/* basket li */
+.basket_top {
+    margin-left: 75px;
 }

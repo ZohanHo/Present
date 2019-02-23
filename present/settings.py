@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -41,6 +42,10 @@ INSTALLED_APPS = [
     'order',
     'bootstrap3',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
 ]
 
@@ -57,7 +62,23 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'present.urls'
 
+AUTHENTICATION_BACKENDS = (
+    # Need to login django admin
+    'django.contrib.auth.backends.ModelBackend',
+    # authentication methods login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
+SITE_ID = 1
+
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_URL = "/accounts/login/"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 TEMPLATES = [

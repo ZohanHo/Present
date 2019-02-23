@@ -83,9 +83,11 @@ $('.open_fast').click(function () { // Описуем что будет прои
 
         //EndAjax
 
-        })
-    });
-    //EndBasket
+
+
+
+        });
+    }); //EndBasket
 
     //при нажатии на корзину показует список товаров
         var basket_top = $(".basket_top");
@@ -101,7 +103,7 @@ $('.open_fast').click(function () { // Описуем что будет прои
 
 
 
-    // Input количества товара
+    // Input количества товара стилизированый кнопками сбоку
         $(function() {(function quantityProducts() {
             var $quantityArrowMinus = $(".quantity-arrow-minus");
             var $quantityArrowPlus = $(".quantity-arrow-plus");
@@ -121,7 +123,8 @@ $('.open_fast').click(function () { // Описуем что будет прои
             }
             })
             ();
-        });
+
+            });
     // EndInput
 
 
@@ -201,4 +204,6 @@ $('.open_fast').click(function () { // Описуем что будет прои
             }
         }
     });
+
+
 

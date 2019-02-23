@@ -29,7 +29,7 @@ urlpatterns = [
     path('air/', ListViewAir.as_view(),  name="air"),
     path('form_popup/', form_popup, name="form_popup_url"),
     path('basket_product/', basket_product, name="basket_product_url"),
-
     path('basket_product/<pk>/delete/', BuketDeleteView, name="buket_del_url"),
+    path('checkout/', checkout, name="checkout"),
 
 ]

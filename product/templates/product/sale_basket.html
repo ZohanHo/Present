@@ -31,34 +31,32 @@
             {% for foo in sesiion_in_basket %}
                 <div class="col-md-8 offset-2">
 
-                    <div style="">
-                        <img src="{{ foo.image_product.url }}" alt="" style="width: 15%;">
-                        <span style="position: absolute; left: 130px; top: 50px; font-size: small; color: #65696D; font-weight: 600">{{ foo.product_name }}</span>
-                        <span style="position: absolute; left: 430px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.price_per_item }} UAH</span>
-                        <span style="position: absolute; left: 540px; top: 40px; font-size: small; color: #65696D; font-weight:bold;">
-                            <div class="quantity-block">
-                                <button class="quantity-arrow-minus"> - </button>
-                                    <input style="width: 14%; text-align: center" class="quantity-num" type="number" value="{{ foo.product_nmb }}" maxlength="100" title="quantity-num"/>
-                                <button class="quantity-arrow-plus"> + </button>
-                            </div>
-                        </span>
-                        <span style="position: absolute; left: 740px; top: 50px; font-size: small; color: #65696D; font-weight:bold;"><a
-                                href="{{ foo.get_absolute_url_basket_del }}"><img src="{% static "images/delete2.png " %}" alt=""></a></span>
+                    <form id="checkout" class="checkout" method="post" action="{% url "checkout" %}">{% csrf_token %}
+                        <div style="">
+                            <img src="{{ foo.image_product.url }}" alt="" style="width: 15%;">
+                            <span style="position: absolute; left: 130px; top: 50px; font-size: small; color: #65696D; font-weight: 600">{{ foo.product_name }}</span>
+                            <span style="position: absolute; left: 430px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.price_per_item }} UAH</span>
+                            <span style="position: absolute; left: 565px; top: 50px; font-size: small; color: #65696D; font-weight:bold;">
+                                    {{ foo.product_nmb }} шт.
+                            </span>
+                            <span style="position: absolute; left: 740px; top: 50px; font-size: small; color: #65696D; font-weight:bold;"><a
+                                    href="{{ foo.get_absolute_url_basket_del }}"><img src="{% static "images/delete2.png " %}" alt=""></a></span>
 
-                        <span style="position: absolute; left: 640px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.total_price }} UAH</span>
-                    </div>
-                    <hr style="background-color: grey; font-weight: bold">
+                            <span class="total_price" style="position: absolute; left: 640px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.total_price }} UAH</span>
+                        </div>
+                        <hr style="background-color: grey; font-weight: bold">
+                    </form>
 
                 </div>
             {% endfor %}
             {% if count %}
             <div style="" class="col-md-8 offset-7">
                 <br>
-                <p style=" margin-left: 1px; font-size: 16px; color: #65696D; font-weight: 600">Итого к оплате <span style="margin-left: 30px; color: brown; font-weight :bold; font-size: 16px">{{ all_total_price }},00 UAH</span></p>
+                <p style="margin-left: 1px; font-size: 16px; color: #65696D; font-weight: 600">Итого к оплате <span class="all_total_price" style="margin-left: 30px; color: brown; font-weight :bold; font-size: 16px">{{ all_total_price }},00 UAH</span></p>
             </div>
 
             <div style="" class="col-md-8 offset-8">
-                <button style="margin-left: 74px" class="btn btn-warning">Оформить заказ</button>
+                <button form="checkout" style="margin-left: 74px" class="btn btn-warning">Оформить заказ</button>
             </div>
             {% endif %}
 
@@ -66,6 +64,36 @@
         </div>
     <br>
 
+    <script>
+
+
+
+         // Подсчет цены в корзине согласно введенному количеству
+
+
+
+            function calculatingBasketAmount() {
+                var total_order_amount = 0; //цена по всем заказам
+                    $(".total_price").each(function () {
+                        total_order_amount = total_order_amount + parseFloat($(this).text());  //общая сума по всем заказам
+
+                    });
+                    console.log(total_order_amount);
+                    $(".all_total_price").text(total_order_amount.toFixed(2) + " " + "UAH"); // вывели значение общей цены на страницу
+
+                }
+
+                $(document).on('change', '.quantity-num' , function () {
+                    console.log('ok');
+                    var corent_nmb = $(this).val();
+                    console.log(corent_nmb);
+
+                });
+            calculatingBasketAmount();
+
+        //коней подсчета цены
+
+    </script>
 
 {% endblock %}
 

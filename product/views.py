@@ -604,10 +604,6 @@ def basket_product(request):
 
     return render(request, "product/sale_basket.html", context={}) #"all_total_price": all_total_price
 
-
-
-
-
 """
 Представление, которое отображает страницу подтверждения и удаляет существующий объект.
  Данный объект будет удален только если используется метод запроса POST. 
@@ -624,3 +620,8 @@ def BuketDeleteView(request, pk):
     obj = ProductInBasket.objects.get(pk=pk)
     obj.delete()
     return render(request, "product/sale_basket.html", context={})
+
+def checkout(request):
+    if request.method == 'POST':  # Проверяем ето запрос POST, если пост то:
+        print(request.POST)
+    return render(request, "product/checkout.html", context={})
