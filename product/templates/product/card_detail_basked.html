@@ -35,6 +35,7 @@
                 <span>Цена с опциями: </span><span id="price_span2">{{ object.price }} </span><span> UAH</span>
                  <hr>
 
+             {% if user.is_authenticated or request.user.is_staff  %}
                 <!-- inout количества товара -->
                 <form id="basket_add" class="basket_add" action="{% url 'basket_product_url' %}">{% csrf_token %}</form>
                 <div class="quantity-block">
@@ -50,7 +51,9 @@
                     >В КОРЗИНУ
                 </button>
                 </div>
-
+            {% else %}
+                <p style="font-size: small; text-align: center" >Для покупки пожалуйста <a href="/accounts/login/">войдите</a> в свой аккаунт или <a href="/accounts/signup/">зарегистрируйтесь</a></p>
+            {% endif %}
             </div>
         </div>
     </div>
@@ -81,13 +84,19 @@
             <div class="col-md-2" style=""></div>
         {% for foo in companion %}
             <div class="col-md-2" style="background: #F3F3F3; color: #65696D;padding: 10px">
-                <img style="width: 100%" src="{{ foo.image_product.url }} " alt="">
+                <img style="width: 100%" src="{{ foo.image_companion.url }} " alt="">
                 <p  style="margin: 10px; color: orange; text-align: center; font-size: 12px">{{ foo.price }} UAH</p>
                 <p style="margin: 10px; color: #65696D; text-align: center; font-size: 10px">{{ foo.product_name }}</p>
 
                 <div style="text-align: center">
-                    <form id="formprice" action="">
-                        <button style="color: white; " class="btn btn-warning">В КОРЗИНУ</button>
+                    <form id="companion" class="companion" action="{% url 'companion' %}" method="post">{% csrf_token %}
+                        <button class="btn btn-warning button_basket" type="submit" form="companion" style="color: white; "
+                            data-price="{{ foo.price }}"
+                            data-name="{{ foo.product_name }}"
+                            data-images="{{ foo.image_companion.url }}"
+                            data-id="{{ foo.id }}"
+                            data-session_key="{{ session_key }}"
+                        >В КОРЗИНУ</button>
                     </form>
                 </div>
             </div>
@@ -108,10 +117,6 @@
                 </div>
             </div>
         </div>
-
-
-</div>
-
-
+    </div>
 
 {% endblock %}

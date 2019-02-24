@@ -77,7 +77,7 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/accounts/login/"
 
-
+#Method as processed e-mqil
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 

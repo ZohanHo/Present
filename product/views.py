@@ -20,14 +20,14 @@ class LandingDetailViewcarousel(DetailView):
     template_name = "product/card_detail_carousel.html"
 
     def get_context_data(self, **kwargs):
-        queryset_compabion = ProductCompanion.objects.all()
+        queryset_companion = ProductCompanion.objects.all()
         products = Product.objects.all()
         one = Product.objects.get(pk="1")
         filter = Product.objects.filter(product_name__icontains="букет")
         filter_get = filter.get(product_name__icontains="КИВИАН")
         size = SizeProd.objects.filter(slug__iexact="size")
         context = super(LandingDetailViewcarousel, self).get_context_data(**kwargs)
-        context["product_companion"] = queryset_compabion
+        context["product_companion"] = queryset_companion
         context["products"] = products
         context["one"] = one
         context["filter"] = filter
@@ -622,6 +622,50 @@ def BuketDeleteView(request, pk):
     return render(request, "product/sale_basket.html", context={})
 
 def checkout(request):
-    if request.method == 'POST':  # Проверяем ето запрос POST, если пост то:
-        print(request.POST)
-    return render(request, "product/checkout.html", context={})
+    # if request.method == 'POST':  # Проверяем ето запрос POST, если пост то:
+    #     print(request.POST)
+    session = request.session.session_key
+
+
+
+
+    all_total_price = 0
+    all_price = ProductInBasket.objects.all()
+    for foo in all_price:
+        one_total_price = foo.total_price
+        all_total_price += int(one_total_price)
+
+    user = request.user
+
+
+    obj = ProductInBasket.objects.filter(session_key = session, is_active=True)
+
+    return render(request, "product/checkout.html", context={"obj":obj, "user":user, 'all_total_price':all_total_price  })
+
+# Работает на коректно, необходимо доработать
+def companion(request):
+    print(request.POST)
+
+    session = request.session.session_key
+
+    id = request.POST.get('id')
+    nmb = request.POST.get('nmb')
+    price = request.POST.get('price')
+    name = request.POST.get('name')
+    key = request.POST.get('session_key')
+    images = request.POST.get('images')
+
+    if session == key:
+        new_product, created = ProductInBasket.objects.get_or_create(
+            # Get ищит совпадения по етим полям
+            product_name=name,
+            image_product=images,
+            session_key=key,
+            # Тут то что попадает под create
+            defaults={"product_nmb": nmb, "price_per_item": price}
+        )
+        if not created:
+            new_product.product_nmb += int(nmb)
+            new_product.save(force_update=True)
+
+    return render(request, "product/sale_basket.html", context={})

@@ -62,7 +62,7 @@ class ProductCompanion(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
-    image_product = models.ImageField(upload_to="static/images/comp", default="")
+    image_companion = models.ImageField(upload_to="static/images/comp", default="")
 
 
     def __str__(self):

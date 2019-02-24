@@ -48,7 +48,7 @@
 <div class="content">
 
     <div style="position: absolute; top: 10%; left: 5%">
-        <img src="{% static 'images/under-construction.png' %}" alt="Сайт в разработке">
+        <a href="http://zohan.pythonanywhere.com/portfolio/"><img src="{% static 'images/under-construction.png' %}" alt="Сайт в разработке"></a>
     </div>
 
     <div class="container">
@@ -130,7 +130,7 @@
                 <div id="basket_item_num"
                      style="position: absolute; top: 23%;left: 90.5%; color: red; font-size: medium; width: 40px" >
                     <p style="background-color: firebrick; width: 25px; text-align: center; border-radius: 20px;
-                    color: white; font-weight: bold; font-size: 16px">{{ count }}</p>
+                    color: white; font-weight: bold; font-size: 14px">{{ count }}</p>
                 </div>
 
             </div>
@@ -153,45 +153,43 @@
 
 </div> <!-- end content for content-->
 
-<!-- footer -->
-<div class="footer">
+    <!-- footer -->
+    <div class="footer">
 
-    <div class="container" style="">
-        <div class="row" style="">
-            <div class="" style="margin-left: 190px; background-color: #4D4443; width: 763px; height: 210px; position: relative"  >
+        <div class="container" style="">
+            <div class="row" style="">
+                <div class="" style="margin-left: 190px; background-color: #4D4443; width: 763px; height: 210px; position: relative"  >
 
-                <div style="" class="">
-                    <p style="padding: 8px 10px 8px;  color: orange; margin-left: 50px; margin-right: 50px; margin-top: 2%; margin-bottom: 3%;  border: dotted lightgray; text-align: center; font-size: small">
-                        Фруктовый букет в Киеве от FRUTADO — вкусный необычный подарок на любой праздник </p>
+                    <div style="" class="">
+                        <p style="padding: 8px 10px 8px;  color: orange; margin-left: 50px; margin-right: 50px; margin-top: 2%; margin-bottom: 3%;  border: dotted lightgray; text-align: center; font-size: small">
+                            Фруктовый букет в Киеве от FRUTADO — вкусный необычный подарок на любой праздник </p>
+                    </div>
+
+                    <div style="position: absolute; left: 60px; top: 100px">
+                        <span>
+                            <br>
+                            <a href=""><img style="" class=""
+                                            src="{% static "media/images/bank/mastercard.png" %}"
+                                            alt="logo"></a>
+                            <a href=""><img style="" class=""
+                                            src="{% static "media/images/bank/visa.png" %}" alt="logo"></a>
+                        </span>
+                    </div>
+
+
+                    <div style="position: absolute; left: 450px; top: 80px; color: white" class="">
+                        <p style="font-size: small">Звоните +38 (066) 55-44-333</p>
+                        <p style="font-size: small">Звоните +38 (099) 88-77-666 (VIBER)</p>
+                        <p style="font-size: small">ежедневно с 9.00-20.00</p>
+
+                        <p style="font-size: small">Banana © 2013-2017. Все права защищены</p>
+                    </div>
+
                 </div>
-
-                <div style="position: absolute; left: 60px; top: 100px">
-                    <span>
-                        <br>
-                        <a href=""><img style="" class=""
-                                        src="{% static "media/images/bank/mastercard.png" %}"
-                                        alt="logo"></a>
-                        <a href=""><img style="" class=""
-                                        src="{% static "media/images/bank/visa.png" %}" alt="logo"></a>
-                    </span>
-                </div>
-
-
-                <div style="position: absolute; left: 450px; top: 80px; color: white" class="">
-                    <p style="font-size: small">Звоните +38 (066) 55-44-333</p>
-                    <p style="font-size: small">Звоните +38 (099) 88-77-666 (VIBER)</p>
-                    <p style="font-size: small">ежедневно с 9.00-20.00</p>
-
-                    <p style="font-size: small">Banana © 2013-2017. Все права защищены</p>
-                </div>
-
             </div>
         </div>
-    </div>
 
-</div> <!-- end footer for footer-->
-
-
+    </div> <!-- end footer for footer-->
 
 
 
@@ -217,8 +215,3 @@
 </div> <!-- end wraper for footer-->
 </body>
 </html>
-
-<style>
-
-
-</style>

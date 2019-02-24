@@ -30,7 +30,7 @@ $('.open_fast').click(function () { // Описуем что будет прои
            // event.preventDefault(); // применяеи фугкцию preventDefault()
             var nmb = $('.basket_add_input').val(); // Считали значение с input (Количество)
 
-            var submit_button = $('.submit_button'); // Взяли ворму по id
+            var submit_button = $('.submit_button'); // Взяли кнопку по id
 
             var name = submit_button.data('name'); // Считали по id название продукта с тега h4 (id)
             var id = submit_button.data('id'); //считали сначение атрибута с data (data-id)
@@ -205,5 +205,78 @@ $('.open_fast').click(function () { // Описуем что будет прои
         }
     });
 
+// Companiom_product
+    $(document).ready(function () {    //скрипт загрузится после того как загрузится вся страница DOM
+        var form_basket = $('.companion');   //выбираем форму используя селектор ID формы
+        form_basket.on('submit', function () {  // on('submit', function - используетсяя при сабмите формы
+            //С помощью функции event.preventDefault(); - можно сделать что бы страница не обновлялась при отправке
+            // формы(предотвращаеет стандартное поведение) передаем аргумент который может называтся как либо, тут event
+           //event.preventDefault(); // применяеи фугкцию preventDefault()
 
+            var button_basket = $('.button_basket');
+
+            var name = button_basket.data('name'); // Считали по id название продукта с тега h4 (id)
+
+            var id = button_basket.data('id'); //считали сначение атрибута с data (data-id)
+            var price = button_basket.data('price'); //считали сначение атрибута с data (data-price)
+            var session_key = button_basket.data('session_key'); //считали сначение атрибута с data (data-price)
+            var images = button_basket.data('images'); //считали сначение атрибута с data (data-price)
+
+        //Ajax
+            var data = {}; // data ето данные (словарь) которые мы будем отправлять на бекенд, (название, цена, id)
+            // url - куда будет перенаправлет post запрос, указать action то будет все как обычно Кажись !!!!
+            var url = $('.companion').attr("action");  //form.attr("action"); - так можно считать url c атрибута формы если указать не путь
+            // "/product/" + new_car_id + "/";
+            //var csrftoken = $("[name=csrfmiddlewaretoken]").val(); //вытянуть токен и использовать если нужно
+            var csrftoken = $('.companion [name="csrfmiddlewaretoken"]').val();
+
+            //ложим нужные переменные в наш словарь data
+            data["nmb"] = 1;
+            data["name"] = name;
+            data["price"] = parseFloat(price);
+            data["csrfmiddlewaretoken"] = csrftoken;
+            data["id"] = id;
+            data["session_key"] = session_key;
+            data["images"] = images;
+
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: data,
+                cache: false,
+                success: function (data) {  // data - словарь который передаем во views.py jsonresponse в словаре
+                console.log('OK - add - ajax');
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+
+        //EndAjax
+
+        });
+    }); //EndBasket
+
+
+    //
+    // // Подсчет цены в корзине согласно введенному количеству
+    // function calculatingBasketAmount() {
+    //     var total_order_amount = 0; //цена по всем заказам
+    //         $(".total_price").each(function () {
+    //             total_order_amount = total_order_amount + parseFloat($(this).text());  //общая сума по всем заказам
+    //
+    //         });
+    //         console.log(total_order_amount);
+    //         $(".all_total_price").text(total_order_amount.toFixed(2) + " " + "UAH"); // вывели значение общей цены на страницу
+    //
+    //     }
+    //
+    //     $(document).on('change', '.quantity-num' , function () {
+    //         console.log('ok');
+    //         var corent_nmb = $(this).val();
+    //         console.log(corent_nmb);
+    //
+    //     });
+    // calculatingBasketAmount();
+    // //коней подсчета цены
 

@@ -31,5 +31,6 @@ urlpatterns = [
     path('basket_product/', basket_product, name="basket_product_url"),
     path('basket_product/<pk>/delete/', BuketDeleteView, name="buket_del_url"),
     path('checkout/', checkout, name="checkout"),
+    path('companion/', companion, name="companion"),
 
 ]

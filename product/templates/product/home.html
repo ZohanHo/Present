@@ -115,7 +115,7 @@
                                             <h5 style="">{{ foo.product_name }}</h5>
                                             <p>{{ foo.price }} UAH</p>
                                             <form action="{{ foo.product.get_absolute_url_carousel }}">
-                                                <a style="" class="btn btn-warning" href="#">&raquo; Read More</a>
+                                                <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
                                             </form>
 
                                         </div>
@@ -135,7 +135,7 @@
                                             <h5>{{ foo.product_name }}</h5>
                                             <p id="test">{{ foo.price }} UAH</p>
                                             <form action="{{ foo.product.get_absolute_url_carousel }}">
-                                                <a style="" class="btn btn-warning" href="#">&raquo; Read More</a>
+                                                <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
                                             </form>
                                         </div>
                                     </li>
@@ -154,7 +154,7 @@
                                             <h5>{{ foo.product_name }}</h5>
                                             <p>{{ foo.price }} UAH</p>
                                             <form action="{{ foo.product.get_absolute_url_carousel }}">
-                                                <a style="" class="btn btn-warning" href="#">&raquo; Read More</a>
+                                                <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
                                             </form>
                                         </div>
                                     </li>

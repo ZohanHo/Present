@@ -35,6 +35,8 @@
                 <span>Цена с опциями: </span><span id="price_span2">{{ object.price }} </span><span> UAH</span>
                  <hr>
 
+             {% if user.is_authenticated or request.user.is_staff  %}
+
                 <!-- input добавить товат в корзину -->
                 <form id="basket_add" class="basket_add" action="{% url 'basket_product_url' %}">{% csrf_token %}</form>
                 <div class="quantity-block">
@@ -50,7 +52,9 @@
                     >В КОРЗИНУ
                 </button>
                 </div>
-
+            {% else %}
+                <p style="font-size: small; text-align: center" >Для покупки пожалуйста <a href="/accounts/login/">войдите</a> в свой аккаунт или <a href="/accounts/signup/">зарегистрируйтесь</a></p>
+            {% endif %}
             </div>
         </div>
     </div>
@@ -84,7 +88,7 @@
             <div class="col-md-2" style=""></div>
         {% for foo in product_companion %}
             <div class="col-md-2" style="background: #F3F3F3; color: #65696D;padding: 10px">
-                <img style="width: 100%" src="{{ foo.image_product.url }} " alt="">
+                <img style="width: 100%" src="{{ foo.image_companion.url }} " alt="">
                 <p  style="margin: 10px; color: orange; text-align: center; font-size: 12px">{{ foo.price }} UAH</p>
                 <p style="margin: 10px; color: #65696D; text-align: center; font-size: 10px">{{ foo.product_name }}</p>
 
