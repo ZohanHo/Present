@@ -550,6 +550,8 @@ def form_popup(request):
     return redirect('/', {"form":form})
 
 
+# Функция которая обрабатывает форму с деталки и через ajax (через post) передает данные в post,
+# которые тут считываем и добавляем в ProductInBaske, отрисовует шаблон корзины - sale_basket.html
 def basket_product(request):
     dict_json = dict()
 
@@ -683,10 +685,6 @@ def companion(request, pk):
     name = obj.product_name
     number = 1
     images = obj.image_companion
-    print(price)
-    print(name)
-    print(number)
-    print(images)
 
     session_key = request.session.session_key
     new_product, created = ProductInBasket.objects.get_or_create(

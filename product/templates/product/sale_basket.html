@@ -37,7 +37,7 @@
                             <span style="position: absolute; left: 130px; top: 50px; font-size: small; color: #65696D; font-weight: 600">{{ foo.product_name }}</span>
                             <span style="position: absolute; left: 430px; top: 50px; font-size: small; color: brown; font-weight:bold;">{{ foo.price_per_item }} UAH</span>
                             <span style="position: absolute; left: 565px; top: 50px; font-size: small; color: #65696D; font-weight:bold;">
-                                    <input style="width: 25px; text-align: center" form="checkout" name="prod_id_{{ foo.id }}" maxlength="100" type="number" value="{{ foo.product_nmb }}"> шт.
+                                    <input style="width: 25px; text-align: center" form="" name="" maxlength="100" type="number" value="{{ foo.product_nmb }}"> шт.
                             </span>
                             <span style="position: absolute; left: 740px; top: 50px; font-size: small; color: #65696D; font-weight:bold;"><a
                                     href="{{ foo.get_absolute_url_basket_del }}"><img src="{% static "images/delete2.png " %}" alt=""></a></span>
