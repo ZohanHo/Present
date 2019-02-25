@@ -63,7 +63,7 @@ class ProductCompanion(models.Model):
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
     image_companion = models.ImageField(upload_to="static/images/comp", default="")
-
+    session_key = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return "{}".format(self.product_name)
@@ -72,10 +72,11 @@ class ProductCompanion(models.Model):
         verbose_name = "Сопутствующий товар"
         verbose_name_plural = "Сопутствующие товары"
 
-    def get_absolute_url_carousel(self):
-        return reverse("carousel_url", kwargs={"pk": self.pk})
+    # def get_absolute_url_carousel(self):
+    #     return reverse("carousel_url", kwargs={"pk": self.pk})
 
-
+    def get_absolute_url_companion(self):
+        return reverse("companion_url", kwargs={"pk": self.pk})
 
 class SizeProd(models.Model):
     size = models.CharField(max_length=100)

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse
 from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Basket, Chocolate, Air, Contact
-from order.models import ProductInBasket, Status
+from order.models import ProductInBasket, Status, Order
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from .forms import FormPopup
@@ -622,12 +622,8 @@ def BuketDeleteView(request, pk):
     return render(request, "product/sale_basket.html", context={})
 
 def checkout(request):
-    # if request.method == 'POST':  # Проверяем ето запрос POST, если пост то:
-    #     print(request.POST)
+
     session = request.session.session_key
-
-
-
 
     all_total_price = 0
     all_price = ProductInBasket.objects.all()
@@ -637,35 +633,75 @@ def checkout(request):
 
     user = request.user
 
+    post = request.POST
+    customer_name = post['name']
+    customer_address = post['adress']
+    customer_phone = post['phone']
+    date = post["date"]
+    comments = post["comment"]
 
     obj = ProductInBasket.objects.filter(session_key = session, is_active=True)
+    for foo in obj:
+        product_name = foo.product_name
+        price_per_item = foo.price_per_item
+        product_nmb = foo.product_nmb
+        total_price = all_total_price
+        session_key = foo.session_key
 
-    return render(request, "product/checkout.html", context={"obj":obj, "user":user, 'all_total_price':all_total_price  })
+        if session == session_key:
 
-# Работает на коректно, необходимо доработать
-def companion(request):
-    print(request.POST)
-
-    session = request.session.session_key
-
-    id = request.POST.get('id')
-    nmb = request.POST.get('nmb')
-    price = request.POST.get('price')
-    name = request.POST.get('name')
-    key = request.POST.get('session_key')
-    images = request.POST.get('images')
-
-    if session == key:
-        new_product, created = ProductInBasket.objects.get_or_create(
-            # Get ищит совпадения по етим полям
-            product_name=name,
-            image_product=images,
-            session_key=key,
-            # Тут то что попадает под create
-            defaults={"product_nmb": nmb, "price_per_item": price}
-        )
-        if not created:
-            new_product.product_nmb += int(nmb)
+            new_product, created = Order.objects.get_or_create(
+                                            # Get ищит совпадения по етим полям
+                                            session_key = session, is_active=True,
+                                            # Тут то что попадает под create
+                                            defaults={"product_name": product_name,
+                                                      "number" : product_nmb,
+                                                      "price_per_item" : price_per_item,
+                                                      "total_price" : total_price,
+                                                      "customer_name" : customer_name,
+                                                      "customer_phone" : customer_phone,
+                                                      "customer_address" : customer_address,
+                                                      "comments" : comments,
+                                                      "date" : date,
+                                                      }
+                                            )
+            # if not created:
+            #     new_product.product_nmb += int(nmb)
             new_product.save(force_update=True)
+
+
+
+    return render(request, "product/congratulations.html", context={"obj":obj, "user":user, 'all_total_price':all_total_price  })
+
+
+
+
+# Работает нt коректно, необходимо доработать
+def companion(request, pk):
+    obj = ProductCompanion.objects.get(pk=pk)
+    price = obj.price
+    name = obj.product_name
+    number = 1
+    images = obj.image_companion
+    print(price)
+    print(name)
+    print(number)
+    print(images)
+
+    session_key = request.session.session_key
+    new_product, created = ProductInBasket.objects.get_or_create(
+        session_key=session_key, product_name = name,
+        defaults={
+        "product_name":name,
+        "image_product":images,
+        "price_per_item":price,
+        "product_nmb":number,
+        "session_key":session_key
+        }
+    )
+
+    if not created:
+        new_product.product_nmb += 1
+        new_product.save(force_update=True)
 
     return render(request, "product/sale_basket.html", context={})

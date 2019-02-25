@@ -89,15 +89,7 @@
                 <p style="margin: 10px; color: #65696D; text-align: center; font-size: 10px">{{ foo.product_name }}</p>
 
                 <div style="text-align: center">
-                    <form id="companion" class="companion" action="{% url 'companion' %}" method="post">{% csrf_token %}
-                        <button class="btn btn-warning button_basket" type="submit" form="companion" style="color: white; "
-                            data-price="{{ foo.price }}"
-                            data-name="{{ foo.product_name }}"
-                            data-images="{{ foo.image_companion.url }}"
-                            data-id="{{ foo.id }}"
-                            data-session_key="{{ session_key }}"
-                        >В КОРЗИНУ</button>
-                    </form>
+                    <a href="{{ foo.get_absolute_url_companion }}"><button class="btn btn-warning" form="" style="color: white; ">В КОРЗИНУ</button></a>
                 </div>
             </div>
         {% endfor %}

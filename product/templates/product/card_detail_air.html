@@ -90,9 +90,9 @@
                 <p style="margin: 10px; color: #65696D; text-align: center; font-size: 10px">{{ foo.product_name }}</p>
 
                 <div style="text-align: center">
-                    <form id="formprice" action="">
-                        <button style="color: white; " class="btn btn-warning">В КОРЗИНУ</button>
-                    </form>
+                    <div style="text-align: center">
+                        <a href="{{ foo.get_absolute_url_companion }}"><button class="btn btn-warning" form="" style="color: white; ">В КОРЗИНУ</button></a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
