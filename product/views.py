@@ -7,6 +7,7 @@ from .forms import FormPopup
 from django.views.generic import *
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 def base(request):
     queryset_product1 = Product.objects.all()[:4]
@@ -623,7 +624,24 @@ def BuketDeleteView(request, pk):
     obj.delete()
     return render(request, "product/sale_basket.html", context={})
 
+
+
+
+
 def checkout(request):
+    all_total_price = 0
+    all_price = ProductInBasket.objects.all()
+    for foo in all_price:
+        one_total_price = foo.total_price
+        all_total_price += int(one_total_price)
+
+    user = request.user
+    session = request.session.session_key
+    obj = ProductInBasket.objects.filter(session_key=session, is_active=True)
+
+    return render(request, "product/checkout.html",context={"obj":obj, "user": user, 'all_total_price':all_total_price})
+
+def congratulations(request):
 
     session = request.session.session_key
 
@@ -633,7 +651,8 @@ def checkout(request):
         one_total_price = foo.total_price
         all_total_price += int(one_total_price)
 
-    user = request.user
+    user = User.objects.get(username=request.user)
+
 
     post = request.POST
     customer_name = post['name']
@@ -643,42 +662,57 @@ def checkout(request):
     comments = post["comment"]
 
     obj = ProductInBasket.objects.filter(session_key = session, is_active=True)
+
     for foo in obj:
         product_name = foo.product_name
         price_per_item = foo.price_per_item
-        product_nmb = foo.product_nmb
         total_price = all_total_price
+        product_nmb = foo.product_nmb
+        total_in_position = foo.total_price
         session_key = foo.session_key
 
         if session == session_key:
 
-            new_product, created = Order.objects.get_or_create(
-                                            # Get ищит совпадения по етим полям
-                                            session_key = session, is_active=True,
-                                            # Тут то что попадает под create
-                                            defaults={"product_name": product_name,
-                                                      "number" : product_nmb,
-                                                      "price_per_item" : price_per_item,
-                                                      "total_price" : total_price,
-                                                      "customer_name" : customer_name,
-                                                      "customer_phone" : customer_phone,
-                                                      "customer_address" : customer_address,
-                                                      "comments" : comments,
-                                                      "date" : date,
-                                                      }
+
+            # new_product, created = Order.objects.get_or_create(
+            #     # Get ищит совпадения по етим полям
+            #     session_key=session, is_active=True,
+            #     # Тут то что попадает под create
+            #     defaults={"product_name": product_name,
+            #               "number": product_nmb,
+            #               "price_per_item": price_per_item,
+            #               "total_price": total_price,
+            #               "customer_name": customer_name,
+            #               "customer_phone": customer_phone,
+            #               "customer_address": customer_address,
+            #               "comments": comments,
+            #               "date": date,
+            #               "user": user,
+            #               }
+            # )
+
+
+            new_product = Order.objects.create(
+                                              session_key= session_key,
+                                              product_name= product_name,
+                                              number= product_nmb,
+                                              price_per_item= price_per_item,
+                                              total_price= total_price,
+                                              total_in_position = total_in_position,
+                                              customer_name= customer_name,
+                                              customer_phone= customer_phone,
+                                              customer_address= customer_address,
+                                              comments= comments,
+                                              date= date,
+                                              user= user,
                                             )
-            # if not created:
-            #     new_product.product_nmb += int(nmb)
+
             new_product.save(force_update=True)
-
-
 
     return render(request, "product/congratulations.html", context={"obj":obj, "user":user, 'all_total_price':all_total_price  })
 
 
-
-
-# Работает нt коректно, необходимо доработать
+# Добавляет товат в корзиру с лендинговой страницы, через get_abs_url
 def companion(request, pk):
     obj = ProductCompanion.objects.get(pk=pk)
     price = obj.price

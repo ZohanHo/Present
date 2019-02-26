@@ -1,9 +1,8 @@
 from django.db import models
 from django.shortcuts import reverse
-
+from django.contrib.auth.models import User  # Импортировали модель User
 
 class Status(models.Model):
-
 
     name_status = models.CharField(max_length=30, blank=True)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -21,14 +20,13 @@ class Status(models.Model):
 class ProductInBasket(models.Model):
     product_name = models.CharField(max_length=100)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     product_nmb = models.IntegerField(default=0, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     is_active = models.BooleanField(default=True)
     image_product = models.ImageField(upload_to="static/images/", default="")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     session_key = models.CharField(max_length=100)
-
 
     def __str__(self):
         return "{}".format(self.product_name)
@@ -48,10 +46,8 @@ class ProductInBasket(models.Model):
         super(ProductInBasket, self).save(*args, **kwargs)
 
 
-
-
 class Order(models.Model):
-    order_number = models.IntegerField(default=0, blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True, default=None, on_delete=True)
     product_name = models.CharField(max_length=100)
     number = models.IntegerField(default=0, blank=True, null=True)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
