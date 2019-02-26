@@ -3,7 +3,7 @@ from .models import Product, ProductCompanion, SizeProd, Recording, Buket, Baske
 from order.models import ProductInBasket, Status, Order
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from .forms import FormPopup
+from .forms import FormPopup, FormOrderContact
 from django.views.generic import *
 from django.http import JsonResponse
 from django.urls import reverse_lazy
@@ -635,11 +635,21 @@ def checkout(request):
         one_total_price = foo.total_price
         all_total_price += int(one_total_price)
 
+
+    if request.method == 'POST':  # Проверяем ето запрос POST, если пост то:
+        form_c = FormOrderContact(request.POST)  # Создаем новый обьект (новую форму)
+        if form_c.is_valid():  # Проыеряем валидна ли форма, отвечает ли требованиям полей модели
+            form_c.save()  # Сохраняем в БД
+    else:  # Если Get или другой
+        form_c = FormOrderContact()  # Создаем новый обьект (новую форму)
+
     user = request.user
     session = request.session.session_key
     obj = ProductInBasket.objects.filter(session_key=session, is_active=True)
 
-    return render(request, "product/checkout.html",context={"obj":obj, "user": user, 'all_total_price':all_total_price})
+    return render(request, "product/checkout.html",context={"obj":obj, "user": user, 'all_total_price':all_total_price, "forma":form_c})
+
+
 
 def congratulations(request):
 
@@ -653,13 +663,12 @@ def congratulations(request):
 
     user = User.objects.get(username=request.user)
 
-
     post = request.POST
-    customer_name = post['name']
-    customer_address = post['adress']
-    customer_phone = post['phone']
+    customer_name = post['customer_name']
+    customer_address = post['customer_address']
+    customer_phone = post['customer_phone']
     date = post["date"]
-    comments = post["comment"]
+    comments = post["comments"]
 
     obj = ProductInBasket.objects.filter(session_key = session, is_active=True)
 
@@ -672,25 +681,6 @@ def congratulations(request):
         session_key = foo.session_key
 
         if session == session_key:
-
-
-            # new_product, created = Order.objects.get_or_create(
-            #     # Get ищит совпадения по етим полям
-            #     session_key=session, is_active=True,
-            #     # Тут то что попадает под create
-            #     defaults={"product_name": product_name,
-            #               "number": product_nmb,
-            #               "price_per_item": price_per_item,
-            #               "total_price": total_price,
-            #               "customer_name": customer_name,
-            #               "customer_phone": customer_phone,
-            #               "customer_address": customer_address,
-            #               "comments": comments,
-            #               "date": date,
-            #               "user": user,
-            #               }
-            # )
-
 
             new_product = Order.objects.create(
                                               session_key= session_key,
@@ -709,7 +699,10 @@ def congratulations(request):
 
             new_product.save(force_update=True)
 
-    return render(request, "product/congratulations.html", context={"obj":obj, "user":user, 'all_total_price':all_total_price  })
+    # Удаляет все с корзины после додавления товара в заказ
+    all_price.delete()
+
+    return render(request, "product/congratulations.html", context={})
 
 
 # Добавляет товат в корзиру с лендинговой страницы, через get_abs_url
