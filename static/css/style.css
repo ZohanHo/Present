@@ -361,3 +361,40 @@ body {
 .basket_top {
     margin-left: 75px;
 }
+
+
+/* popup на лендинге для регистрации */
+    .popup_fast_reg {
+    width: 300px;  /* ширина окна popup */
+    height: 90px; /* высота окна popup */
+    background: #F9C000;
+    z-index: 100; /* поверх всех елементов на странице */
+    padding: 10px 0 15px;
+    position: absolute; top: 25%;
+    left: 0;
+    right: 0;
+    margin: auto; /* оцентровка по центру */
+    border-radius: 15px;
+    border: solid 1px grey;
+    display: none; /* изначально скрыт */
+    font-size: 16px
+    /*@include transform(translate(-1000px)); !* вылазит сбоку *!*/
+    /*@inclue transition(.4s)*/
+    }
+
+    .popup_fast_reg.active   {
+        display: block;
+        /*@include transform(translate(0px));*/
+    }
+
+    .bg_popup_reg {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        background: rgba(0, 0, 0, .7);
+        display: none;
+    }
+/* end popup на лендинге для регистрации */

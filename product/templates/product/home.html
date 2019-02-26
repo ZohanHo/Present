@@ -105,38 +105,59 @@
                 <div class="carousel slide" id="myCarousel">
                     <div class="carousel-inner">
                         <div class="item active">
+
                             <ul class="thumbnails">
                                 {% for foo in product1 %}
                                     <li class="col-md-3">
                                         <div class="thumbnail">
-                                            <a href="{{ foo.get_absolute_url_carousel }}"><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% if request.user.is_authenticated or request.user.is_staff %}
+                                                <a href="{{ foo.get_absolute_url_carousel }}"><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% else %}
+                                                <a class="open_fast_reg" href=""><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% endif %}
                                         </div>
                                         <div class="caption" style="position: relative">
                                             <h5 style="">{{ foo.product_name }}</h5>
                                             <p>{{ foo.price }} UAH</p>
-                                            <form action="{{ foo.product.get_absolute_url_carousel }}">
-                                                <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
-                                            </form>
-
+                                            {% if request.user.is_authenticated or request.user.is_staff %}
+                                                <form  action="{{ foo.product.get_absolute_url_carousel }}">
+                                                    <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
+                                                </form>
+                                            {% else %}
+                                                <div  style="">
+                                                <a href="" class="btn btn-warning open_fast_reg">&raquo; Выбрать</a>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </li>
                                 {% endfor %}
                             </ul>
+
                         </div><!-- /Slide1 -->
 
                         <div class="item">
-                            <ul class="thumbnails">
+                           <ul class="thumbnails">
                                 {% for foo in product2 %}
                                     <li class="col-md-3">
                                         <div class="thumbnail">
-                                            <a href="{{ foo.get_absolute_url_carousel }}"><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% if request.user.is_authenticated or request.user.is_staff %}
+                                                <a href="{{ foo.get_absolute_url_carousel }}"><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% else %}
+                                                <a class="open_fast_reg" href=""><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% endif %}
                                         </div>
-                                        <div class="caption">
-                                            <h5>{{ foo.product_name }}</h5>
-                                            <p id="test">{{ foo.price }} UAH</p>
-                                            <form action="{{ foo.product.get_absolute_url_carousel }}">
-                                                <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
-                                            </form>
+                                        <div class="caption" style="position: relative">
+                                            <h5 style="">{{ foo.product_name }}</h5>
+                                            <p>{{ foo.price }} UAH</p>
+                                            {% if request.user.is_authenticated or request.user.is_staff %}
+                                                <form  action="{{ foo.product.get_absolute_url_carousel }}">
+                                                    <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
+                                                </form>
+                                            {% else %}
+                                                <div  style="">
+                                                <a href="" class="btn btn-warning open_fast_reg">&raquo; Выбрать</a>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </li>
                                 {% endfor %}
@@ -148,14 +169,24 @@
                                 {% for foo in product3 %}
                                     <li class="col-md-3">
                                         <div class="thumbnail">
-                                            <a style="" href="{{ foo.get_absolute_url_carousel }}"><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% if request.user.is_authenticated or request.user.is_staff %}
+                                                <a href="{{ foo.get_absolute_url_carousel }}"><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% else %}
+                                                <a class="open_fast_reg" href=""><img src="{{ foo.image_product.url }}" alt=""></a>
+                                            {% endif %}
                                         </div>
-                                        <div class="caption" style="">
-                                            <h5>{{ foo.product_name }}</h5>
+                                        <div class="caption" style="position: relative">
+                                            <h5 style="">{{ foo.product_name }}</h5>
                                             <p>{{ foo.price }} UAH</p>
-                                            <form action="{{ foo.product.get_absolute_url_carousel }}">
-                                                <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
-                                            </form>
+                                            {% if request.user.is_authenticated or request.user.is_staff %}
+                                                <form  action="{{ foo.product.get_absolute_url_carousel }}">
+                                                    <a style="" class="btn btn-warning" href="{{ foo.get_absolute_url_carousel }}">&raquo; Выбрать</a>
+                                                </form>
+                                            {% else %}
+                                                <div  style="">
+                                                <a href="" class="btn btn-warning open_fast_reg">&raquo; Выбрать</a>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </li>
                                 {% endfor %}
@@ -205,6 +236,35 @@
     <br>
     <br>
 
+ <!-- всплываюшее окно - popup рендинговой страницы  -->
+        <div class="popup_fast_reg" style="">
+            <h5 style=" text-align: center; font-weight: bold;">Для заказа необходима регистрация</h5>
+            <div style="text-align: center; padding:15px" class="card-footer" id="hiden">
+                <a style="background-color: brown" href="/accounts/login" class="btn btn-secondary">Зарегистрироватся</a>
+                <a style="background-color: brown" href="{{ object.get_absolute_url }}" class="btn btn-secondary">Вернуться к сайту</a>
+            </div>
+
+
+        </div>
+        <div class="bg_popup_reg" style=""></div>
+
+
+
+    <script>
+
+        $('.open_fast_reg').click(function (event) { // Описуем что будет происходить по клику на кнопку с класом .open_fast
+            event.preventDefault();
+            console.log('ok');
+            $('.popup_fast_reg').css({"top": $(window).scrollTop() + 220}).addClass('active'); // ccs свойство top, проскроливать + 220
+            var bg_popup = $('.bg_popup_reg');
+            bg_popup.fadeIn(); // fadeIn() - плавно появляется
+            bg_popup.click(function () {   // удаляем при нажати на на люьом месте кроме окна котрое появилось
+            $('.popup_fast_reg').removeClass('active');
+            bg_popup.fadeOut();
+            });
+         });
+
+    </script>
 
 
 

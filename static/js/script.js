@@ -205,60 +205,10 @@ $('.open_fast').click(function () { // Описуем что будет прои
         }
     });
 
-// // Companiom_product
-//     $(document).ready(function () {    //скрипт загрузится после того как загрузится вся страница DOM
-//         var form_basket = $('.companion');   //выбираем форму используя селектор ID формы
-//         form_basket.on('submit', function () {  // on('submit', function - используетсяя при сабмите формы
-//             //С помощью функции event.preventDefault(); - можно сделать что бы страница не обновлялась при отправке
-//             // формы(предотвращаеет стандартное поведение) передаем аргумент который может называтся как либо, тут event
-//            //event.preventDefault(); // применяеи фугкцию preventDefault()
-//
-//             var button_basket = $('.button_basket');
-//
-//             var name = button_basket.data('name'); // Считали по id название продукта с тега h4 (id)
-//
-//             var id = button_basket.data('id'); //считали сначение атрибута с data (data-id)
-//             var price = button_basket.data('price'); //считали сначение атрибута с data (data-price)
-//             var session_key = button_basket.data('session_key'); //считали сначение атрибута с data (data-price)
-//             var images = button_basket.data('images'); //считали сначение атрибута с data (data-price)
-//
-//         //Ajax
-//             var data = {}; // data ето данные (словарь) которые мы будем отправлять на бекенд, (название, цена, id)
-//             // url - куда будет перенаправлет post запрос, указать action то будет все как обычно Кажись !!!!
-//             var url = $('.companion').attr("action");  //form.attr("action"); - так можно считать url c атрибута формы если указать не путь
-//             // "/product/" + new_car_id + "/";
-//             //var csrftoken = $("[name=csrfmiddlewaretoken]").val(); //вытянуть токен и использовать если нужно
-//             var csrftoken = $('.companion [name="csrfmiddlewaretoken"]').val();
-//
-//             //ложим нужные переменные в наш словарь data
-//             data["nmb"] = 1;
-//             data["name"] = name;
-//             data["price"] = parseFloat(price);
-//             data["csrfmiddlewaretoken"] = csrftoken;
-//             data["id"] = id;
-//             data["session_key"] = session_key;
-//             data["images"] = images;
-//
-//             $.ajax({
-//                 url: url,
-//                 type: 'post',
-//                 data: data,
-//                 cache: false,
-//                 success: function (data) {  // data - словарь который передаем во views.py jsonresponse в словаре
-//                 console.log('OK - add - ajax');
-//                 },
-//                 error: function () {
-//                     console.log('error');
-//                 }
-//             });
-//
-//         //EndAjax
-//
-//         });
-//     }); //EndBasket
 
 
-    //
+
+
     // // Подсчет цены в корзине согласно введенному количеству
     // function calculatingBasketAmount() {
     //     var total_order_amount = 0; //цена по всем заказам
@@ -280,3 +230,17 @@ $('.open_fast').click(function () { // Описуем что будет прои
     // calculatingBasketAmount();
     // //коней подсчета цены
 
+
+// popup для рега на главной странице
+$('.open_fast_reg').click(function (event) { // Описуем что будет происходить по клику на кнопку с класом .open_fast
+    event.preventDefault();
+    console.log('ok');
+    $('.popup_fast_reg').css({"top": $(window).scrollTop() + 220}).addClass('active'); // ccs свойство top, проскроливать + 220
+    var bg_popup = $('.bg_popup_reg');
+    bg_popup.fadeIn(); // fadeIn() - плавно появляется
+    bg_popup.click(function () {   // удаляем при нажати на на люьом месте кроме окна котрое появилось
+    $('.popup_fast_reg').removeClass('active');
+    bg_popup.fadeOut();
+    });
+ });
+// end popup для рега на главной странице
