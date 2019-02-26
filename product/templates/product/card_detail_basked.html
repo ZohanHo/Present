@@ -89,7 +89,11 @@
                 <p style="margin: 10px; color: #65696D; text-align: center; font-size: 10px">{{ foo.product_name }}</p>
 
                 <div style="text-align: center">
-                    <a href="{{ foo.get_absolute_url_companion }}"><button class="btn btn-warning" form="" style="color: white; ">В КОРЗИНУ</button></a>
+                    {% if request.user.is_authenticated or request.user.is_staff %}
+                        <a href="{{ foo.get_absolute_url_companion }}"><button class="btn btn-warning" form="" style="color: white; ">В КОРЗИНУ</button></a>
+                    {% else %}
+                        <a href=""><button class="btn btn-warning open_fast_reg" form="" style="color: white; ">В КОРЗИНУ</button></a>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
@@ -110,5 +114,17 @@
             </div>
         </div>
     </div>
+
+    <!-- всплываюшее окно - popup рендинговой страницы  -->
+    <div class="popup_fast_reg" style="">
+        <h5 style=" text-align: center; font-weight: bold;">Для заказа необходима регистрация</h5>
+        <div style="text-align: center; padding:15px" class="card-footer" id="hiden">
+            <a style="background-color: brown" href="/accounts/login" class="btn btn-secondary">Зарегистрироватся</a>
+            <a style="background-color: brown" href="{{ object.get_absolute_url }}" class="btn btn-secondary">Вернуться к сайту</a>
+        </div>
+
+
+    </div>
+    <div class="bg_popup_reg" style=""></div>
 
 {% endblock %}
