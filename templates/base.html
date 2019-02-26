@@ -118,9 +118,13 @@
                 <!-- div в котором будет отображатся количество товаров в корзине -->
                 <div class="basket_item d-none" style="border-radius: 20px; z-index: 1;  position: absolute; top: 108%; left: 56%; opacity: .9; color: white; font-size: small; background-color: #332F2F; width: 340px" >
                     <ul style="margin: 10px 20px; font-size: 10px; ">
-                        {% for foo in sesiion_in_basket %}
-                        <li style="list-style-type: none; font-size: small; "><span>{{ foo.product_name }}</span> - <span style="">{{ foo.product_nmb }}</span>шт</li>
-                        {% endfor %}
+                        {% if count %}
+                            {% for foo in sesiion_in_basket %}
+                                <li style="list-style-type: none; font-size: small; "><span>{{ foo.product_name }}</span> - <span style="">{{ foo.product_nmb }}</span>шт</li>
+                            {% endfor %}
+                        {% else %}
+                            <p style="font-weight: bold; font-size: small">Ваша корзина пуста</p>
+                        {% endif %}
                     </ul>
                     {% if sesiion_in_basket %}
                     <hr style="background-color: black">
