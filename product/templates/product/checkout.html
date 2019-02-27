@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+    {% if count %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <h1 style="margin-top: 20px; color: #F9C000">Покупатель: <a style="color: brown" href="/admin">{{ user }}</a></h1>
+
+                <br>
+            {% for foo in obj %}
+
+                <div style="">
+                    <img src="{{ foo.image_product.url }}" alt="" style="width: 5%;">
+                    <span style="font-size: small; color: #65696D; font-weight: 600">{{ foo.product_name }} --- </span>
+                    <span style="font-size: small; color: #65696D; font-weight:bold;">{{ foo.product_nmb }}шт --- </span>
+                    <span style="font-size: small; color: brown; font-weight:bold;">{{ foo.total_price }} UAH</span>
+
+                </div>
+                <hr style="background-color: ghostwhite; font-weight:normal;"/>
+
+            {% endfor %}
+
+
+            <div style="" class="col-md-8 offset-7">
+                <br>
+                <p style="margin-left: 1px; font-size: 16px; color: #65696D; font-weight: 600">Итого к оплате <span class="all_total_price" style="margin-left: 30px; color: brown; font-weight :bold; font-size: 16px">{{ all_total_price }},00 UAH</span></p>
+            </div>
+            <div style="border:solid ghostwhite; padding: 10px " class="col-md-5 offset-1">
+                <h3 style="color: #F9C000">Информация по заказу</h3>
+                <br>
+                <form id="congratulations" method="post" action="{% url "congratulations" %}">{% csrf_token %}
+                    <span class="" style="font-size: 12px">Ваше имя</span>
+                    <div style="margin-bottom: 5px" >{{ forma.customer_name }}</div>
+                    <span class="" style="font-size: 12px; padding-top: 10px">Адресс доставик</span>
+                    <div style="margin-bottom: 5px">{{ forma.customer_address }}</div>
+                    <span class="" style="font-size: 12px">Контактный телефон</span>
+                    <div style="margin-bottom: 5px">{{ forma.customer_phone }}</div>
+
+                    <span style="font-size: 12px">Дата доставик</span>
+                    <div style="margin-bottom: 5px"><input name="date" type="date"></div>
+
+                    <span class="" style="font-size: 12px">Коментарий</span>
+                    <div>{{ forma.comments }}</div>
+                </form>
+            </div>
+            <div style="" class="col-md-8 offset-9">
+                <button type="submit" form="congratulations" style="margin-left: 74px; color: white; font-size: small" class="btn btn-warning">Подтвердить</button>
+            </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <p></p>
+ {% endif %}
+
+
+{% endblock %}

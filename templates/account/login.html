@@ -1,0 +1,62 @@
+{% extends "account/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-2" style="background-color: #FFFFFF">
+
+                <h1 style="color: #F9C000; margin: 30px">{% trans "Войти" %}</h1>
+
+                {% get_providers as socialaccount_providers %}
+
+                {% if socialaccount_providers %}
+                <p style="padding: 10px; font-size: small">{% blocktrans with site.name as site_name %}Пожалуйста, войдите под вашей учетной записью. Или же,<a href="{{ signup_url }}"> зарегистрируйтесь</a>
+                для для дальнейшей работы:{% endblocktrans %}</p>
+
+                <div class="socialaccount_ballot">
+
+                <div style="margin-left: 22px" class="socialaccount_providers">
+                    <span><a href=""><img style="width: 20%; border-radius: 5px; " src="{% static "media/images/google.png" %}" alt=""></a></span>
+                    <span><a href=""><img style="width: 20%; border-radius: 5px; margin-left: 10px" src="{% static "media/images/facebook.png" %}" alt=""></a></span>
+
+{#                {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
+                </div>
+
+                <div style="padding: 10px; margin-left: 30px" class="login-or">{% trans 'или' %}</div>
+
+                </div>
+
+                {% include "socialaccount/snippets/login_extra.html" %}
+
+                {% else %}
+                <p style="padding: 10px">{% blocktrans %}If you have not created an account yet, then please
+                <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+                {% endif %}
+
+                <form  style="padding: 10px; width: 200px" class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {% bootstrap_form form  %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                    <button class="btn btn-warning" type="submit">{% trans "Sign In" %}</button>
+                </form>
+
+                <img style="width: 50%; text-align: center; margin-top: 10px; margin-bottom: 20px" src="{% static "media/images/registrations.jpg" %}" alt="">
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
